@@ -1,0 +1,172 @@
+.onboarding-shell {
+  min-height: 100vh;
+  background: var(--canvas);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://images.unsplash.com/photo-1544641979-e58eb3108c5c?auto=format&fit=crop&w=2000&q=80');
+  background-size: cover;
+  background-position: center;
+}
+.onboarding-shell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.onboarding-progress-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--hairline-strong);
+  z-index: 100;
+}
+.onboarding-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.5s var(--ease);
+}
+
+.onboarding-step-counter {
+  position: fixed;
+  top: 24px; right: 40px;
+  z-index: 101;
+}
+
+.onboarding-center {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.onboarding-card {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 0;
+  padding: 80px 60px;
+  backdrop-filter: blur(10px);
+}
+
+.onboarding-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary);
+  margin-bottom: 24px;
+}
+
+.onboarding-question {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  font-weight: 400;
+  color: var(--on-dark);
+  line-height: 1.1;
+  min-height: 140px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.onboarding-cursor {
+  display: inline-block;
+  color: var(--primary);
+  animation: blink 1s step-end infinite;
+  margin-left: 4px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.onboarding-input-wrap { margin-bottom: 40px; }
+.onboarding-input { font-size: 24px; padding: 16px 0; border-bottom: 1px solid var(--primary); }
+
+.onboarding-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.skill-chip {
+  padding: 10px 24px;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  border: 1px solid var(--hairline-strong);
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.2s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-chip:hover { border-color: var(--primary); color: var(--on-dark); }
+.skill-chip.selected { background: transparent; border-color: var(--primary); color: var(--primary); }
+.skill-chip-check { font-size: 11px; }
+
+.onboarding-roles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px;
+  border-radius: 0;
+  border: 1px solid var(--hairline-strong);
+  background: transparent;
+  transition: all 0.2s var(--ease);
+  text-align: left;
+}
+.role-card:hover { border-color: var(--primary); }
+.role-card.selected { border-color: var(--primary); background: transparent; color: var(--primary); }
+.role-icon { font-size: 24px; margin-bottom: 8px; opacity: 0.5; }
+.role-card.selected .role-icon { opacity: 1; }
+.role-name { font-size: 14px; font-weight: 400; color: var(--on-dark); font-family: var(--font-mono); letter-spacing: 2px; text-transform: uppercase; }
+.role-card.selected .role-name { color: var(--primary); }
+.role-desc { font-size: 14px; color: var(--text-muted); font-family: var(--font-body); }
+
+.onboarding-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  border-top: 1px solid var(--hairline-strong);
+  padding-top: 40px;
+}
+
+.onboarding-cta {
+  min-width: 200px;
+  justify-content: center;
+}
+.onboarding-cta:disabled { opacity: 0.2; cursor: not-allowed; transform: none; border-color: var(--hairline-strong); }
+
+.onboarding-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.onboarding-dot {
+  width: 40px; height: 1px;
+  border-radius: 0;
+  background: var(--hairline-strong);
+  transition: all 0.3s var(--ease);
+}
+.onboarding-dot.active {
+  background: var(--primary);
+}

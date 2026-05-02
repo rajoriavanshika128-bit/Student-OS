@@ -1,0 +1,97 @@
+.celebration-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.96);
+  backdrop-filter: blur(12px);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: celebFadeIn 0.2s var(--ease);
+}
+
+@keyframes celebFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.celebration-particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  animation: burst 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes burst {
+  0% { transform: translate(0, 0) scale(1) rotate(45deg); opacity: 1; }
+  100% { transform: var(--translate-end) scale(0) rotate(45deg); opacity: 0; }
+}
+
+.celebration-card {
+  background: var(--card);
+  border: 1px solid rgba(232,213,183,0.3);
+  border-radius: 20px;
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  z-index: 1;
+  animation: celebCardIn 0.4s var(--ease);
+  box-shadow: 0 0 80px rgba(232,213,183,0.15);
+  max-width: 420px;
+  width: 90%;
+}
+
+@keyframes celebCardIn {
+  from { opacity: 0; transform: scale(0.85) translateY(30px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.celebration-emoji {
+  font-size: 56px;
+  margin-bottom: 4px;
+  animation: bounce 0.6s var(--ease);
+}
+
+@keyframes bounce {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.2); }
+}
+
+.celebration-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  animation: celebFadeUp 0.4s var(--ease) 0.3s both;
+}
+
+.celebration-skill {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  animation: celebFadeUp 0.4s var(--ease) 0.5s both;
+}
+
+.celebration-xp {
+  font-family: var(--font-mono);
+  font-size: 72px;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1;
+}
+
+@keyframes celebFadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.celebration-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+}
