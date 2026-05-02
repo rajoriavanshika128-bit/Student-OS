@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDNA } from '../context/DNAContext'
+import HeroVideo from '../components/HeroVideo'
 
 export default function FocusTimer() {
   const { addXP, incrementFocusSessions } = useDNA()
@@ -7,7 +8,6 @@ export default function FocusTimer() {
   const [timeLeft, setTimeLeft] = useState(25 * 60)
   const [isActive, setIsActive] = useState(false)
   const timerRef = useRef(null)
-
 
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem('studentos_focus_history') || '{}') } catch { return {} }
@@ -29,7 +29,6 @@ export default function FocusTimer() {
       addXP(30, 'Focus Session Complete')
       incrementFocusSessions()
       
-     
       const today = new Date().toLocaleDateString()
       const newHistory = { ...history, [today]: (history[today] || 0) + 1 }
       setHistory(newHistory)
@@ -38,7 +37,6 @@ export default function FocusTimer() {
       setMode('Short Break')
       setTimeLeft(5 * 60)
     } else {
-      
       setMode('Focus Session')
       setTimeLeft(25 * 60)
     }
@@ -64,7 +62,6 @@ export default function FocusTimer() {
   const r = 120
   const circ = 2 * Math.PI * r
   
-  
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const todayDate = new Date()
   const weekData = []
@@ -83,13 +80,11 @@ export default function FocusTimer() {
 
   return (
     <div className="page-enter">
-      <div 
-        className="hero-photo-band" 
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=2000&q=80')` }}
-      >
-        <div className="section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Deep Work</div>
-        <h1 className="section-title" style={{ fontSize: 64 }}>FOCUS TIMER</h1>
-        <div className="section-label" style={{ marginTop: 24, letterSpacing: '4px', color: '#ffffff' }}>Build momentum with timed focus</div>
+      <div className="hero-photo-band">
+        <HeroVideo />
+        <div className="section-label">Deep Work</div>
+        <h1 className="section-title">Focus Timer</h1>
+        <div className="section-sub">Build momentum with timed focus</div>
       </div>
 
       <div className="grid-2" style={{ marginBottom: 'var(--spacing-section)' }}>

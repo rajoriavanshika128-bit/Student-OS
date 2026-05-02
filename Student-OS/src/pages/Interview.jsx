@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDNA } from '../context/DNAContext'
 import { INTERVIEW_DATA } from '../data/interviewData'
+import HeroVideo from '../components/HeroVideo'
 
 export default function Interview() {
   const { dna, addXP } = useDNA()
@@ -47,13 +48,11 @@ export default function Interview() {
 
   return (
     <div className="page-enter">
-      <div 
-        className="hero-photo-band" 
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=2000&q=80')` }}
-      >
-        <div className="section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Preparation</div>
-        <h1 className="section-title" style={{ fontSize: 64 }}>INTERVIEW ARENA</h1>
-        <div className="section-label" style={{ marginTop: 24, letterSpacing: '4px', color: '#ffffff' }}>Role-specific questions</div>
+      <div className="hero-photo-band">
+        <HeroVideo />
+        <div className="section-label">Preparation</div>
+        <h1 className="section-title">Interview Arena</h1>
+        <div className="section-sub">Role-specific questions</div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, borderBottom: '1px solid var(--hairline-strong)', paddingBottom: 16 }}>

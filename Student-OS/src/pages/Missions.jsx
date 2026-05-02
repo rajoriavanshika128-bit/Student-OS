@@ -80,7 +80,7 @@ export default function Missions() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">Daily Execution</div>
-        <h1 className="section-title">MISSIONS</h1>
+        <h1 className="section-title">Missions</h1>
         <div className="section-sub">Complete 3 daily tasks</div>
       </div>
 

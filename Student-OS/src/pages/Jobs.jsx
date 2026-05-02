@@ -102,7 +102,7 @@ export default function Jobs() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">Market Pulse</div>
-        <h1 className="section-title">JOB MARKET</h1>
+        <h1 className="section-title">Job Market</h1>
         <div className="section-sub">Live opportunities for {dna.dreamRole}</div>
       </div>
 

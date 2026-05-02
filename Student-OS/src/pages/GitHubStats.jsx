@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AnimatedCounter from '../components/AnimatedCounter'
 import { useDNA } from '../context/DNAContext'
+import HeroVideo from '../components/HeroVideo'
 
 export default function GitHubStats() {
   const { dna, addXP } = useDNA()
@@ -75,32 +76,17 @@ export default function GitHubStats() {
     (daysSinceLastPush !== null && daysSinceLastPush < 7 ? 15 : 0)
   )) : 0
 
-  const getLanguageColor = (lang) => {
-    const map = {
-      'JavaScript': '#F59E0B',
-      'TypeScript': '#3B82F6',
-      'Python': '#60A5FA',
-      'HTML': '#F87171',
-      'CSS': '#F472B6',
-      'Java': '#EA580C',
-      'C++': '#F43F5E'
-    }
-    return map[lang] || '#9CA3AF'
-  }
-
   const topRepos = [...repos]
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
     .slice(0, 6)
 
   return (
     <div className="page-enter">
-      <div 
-        className="hero-photo-band" 
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1544641979-e58eb3108c5c?auto=format&fit=crop&w=2000&q=80')` }}
-      >
-        <div className="section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Developer Identity</div>
-        <h1 className="section-title" style={{ fontSize: 64 }}>GITHUB STATS</h1>
-        <div className="section-label" style={{ marginTop: 24, letterSpacing: '4px', color: '#ffffff' }}>Open Source Impact</div>
+      <div className="hero-photo-band">
+        <HeroVideo />
+        <div className="section-label">Developer Identity</div>
+        <h1 className="section-title">GitHub Stats</h1>
+        <div className="section-sub">Open Source Impact</div>
       </div>
 
       {!dna?.githubUsername && !userData && !loading && (

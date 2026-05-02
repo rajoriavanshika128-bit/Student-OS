@@ -55,7 +55,7 @@ export default function SkillGap() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">SYSTEM DIAGNOSTICS</div>
-        <h1 className="section-title">PERFORMANCE GAP</h1>
+        <h1 className="section-title">Performance Gap</h1>
         <div className="section-sub">
           Continuous assessment of technical proficiency against {dna.dreamRole} standards. 
           Real-time synchronization with active repositories.

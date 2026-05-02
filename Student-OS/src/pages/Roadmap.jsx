@@ -32,7 +32,7 @@ export default function Roadmap() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">Your Journey</div>
-        <h1 className="section-title">CAREER ROADMAP</h1>
+        <h1 className="section-title">Career Roadmap</h1>
         <div className="section-sub">Month-by-month milestones for {dna.dreamRole}</div>
       </div>
 

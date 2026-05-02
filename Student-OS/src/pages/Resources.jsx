@@ -31,7 +31,7 @@ export default function Resources() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">Knowledge Base</div>
-        <h1 className="section-title">RESOURCE LIBRARY</h1>
+        <h1 className="section-title">Resource Library</h1>
         <div className="section-sub">Curated materials for your skill gaps</div>
       </div>
 

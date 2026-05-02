@@ -151,7 +151,7 @@ export default function Profile() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">DNA IDENTITY</div>
-        <h1 className="section-title">USER PROFILE</h1>
+        <h1 className="section-title">User Profile</h1>
         <div className="section-sub">
           Core biographical data and technical DNA sequence. 
           Managed via StudentOS X Performance Engine.

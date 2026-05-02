@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDNA } from '../context/DNAContext'
 import { ROLE_SKILLS } from '../data/roleSkills'
+import HeroVideo from '../components/HeroVideo'
 
 export default function Resume() {
   const { dna, addXP } = useDNA()
@@ -44,13 +45,11 @@ export default function Resume() {
 
   return (
     <div className="page-enter">
-      <div 
-        className="hero-photo-band" 
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=2000&q=80')` }}
-      >
-        <div className="section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Optimization</div>
-        <h1 className="section-title" style={{ fontSize: 64 }}>RESUME ANALYZER</h1>
-        <div className="section-label" style={{ marginTop: 24, letterSpacing: '4px', color: '#ffffff' }}>Check ATS matches for {dna.dreamRole}</div>
+      <div className="hero-photo-band">
+        <HeroVideo />
+        <div className="section-label">Optimization</div>
+        <h1 className="section-title">Resume Analyzer</h1>
+        <div className="section-sub">Check ATS matches for {dna.dreamRole}</div>
       </div>
 
       <div className="grid-2" style={{ marginBottom: 'var(--spacing-section)' }}>

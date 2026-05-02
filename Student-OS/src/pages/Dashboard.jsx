@@ -38,7 +38,7 @@ export default function Dashboard() {
         <h1 className="section-title">
           {greetingText.map((word, i) => (
             <span key={i} style={{ display: 'inline-block', animation: `fadeUp 0.4s var(--ease) ${i * 80}ms both`, marginRight: '0.4em' }}>
-              {word.toUpperCase()}
+              {word}
             </span>
           ))}
         </h1>
@@ -175,7 +175,7 @@ function XPRing({ xp, levelInfo }) {
 
 function getGreeting() {
   const h = new Date().getHours()
-  if (h < 12) return 'morning'
-  if (h < 17) return 'afternoon'
-  return 'evening'
+  if (h < 12) return 'Morning'
+  if (h < 17) return 'Afternoon'
+  return 'Evening'
 }

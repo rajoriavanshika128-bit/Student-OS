@@ -19,7 +19,7 @@ export default function Projects() {
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Build Your Portfolio</div>
-        <h1 className="section-title">PROJECT IDEAS</h1>
+        <h1 className="section-title">Project Ideas</h1>
         <div className="section-sub">Real-world projects for {dna.dreamRole}</div>
       </div>
 

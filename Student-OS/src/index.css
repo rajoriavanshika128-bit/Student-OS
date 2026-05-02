@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 :root {
 
   --canvas: #000000;
@@ -20,9 +22,11 @@
   
   --warning: #d4a017;
   --success: #5fa657;
+  --accent-blue: #00d4ff; /* Aesthetic electric blue */
   
  
   --card: var(--surface-card);
+
   --elevated: var(--surface-elevated);
   --accent: var(--primary);
   --accent-dim: rgba(255,255,255,0.1);
@@ -52,12 +56,14 @@
   --spacing-section: var(--s-16);
   
 
-  --font-heading: 'Saira Condensed', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: 'Cormorant Garamond', Garamond, "Times New Roman", serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+
 
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,12 +89,11 @@ a { color: inherit; text-decoration: none; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
 
-.font-heading { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.15em; }
+.font-heading { font-family: var(--font-heading); letter-spacing: 0.15em; }
 .font-mono { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.85em; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  text-transform: uppercase;
   color: var(--on-dark);
   font-weight: 300;
   letter-spacing: 0.1em;
@@ -144,41 +149,54 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.4em;
+  font-size: 11px; /* Smaller */
+  letter-spacing: 0.6em; 
   text-transform: uppercase;
-  color: var(--text-muted-soft);
-  margin-bottom: var(--s-3);
+  color: var(--primary);
+  margin-bottom: var(--s-6); 
   display: flex;
   align-items: center;
-  gap: var(--s-2);
+  gap: var(--s-3);
+  font-weight: 700;
+  opacity: 0.8;
 }
 .section-label::before {
   content: '';
-  width: 12px;
-  height: 1px;
-  background: var(--hairline-strong);
+  width: 24px;
+  height: 2px;
+  background: var(--primary);
 }
+
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(32px, 5vw, 64px);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--on-dark);
-  line-height: 1.1;
-  margin-bottom: var(--s-2);
-  font-weight: 300;
+  font-size: clamp(48px, 9vw, 110px); /* Reduced size as requested */
+  letter-spacing: 0.05em; /* Tighter spread for the elegant serif */
+  font-style: italic; /* From the image */
+  color: var(--accent-blue); /* Aesthetic Blue */
+  line-height: 1;
+  margin-bottom: var(--s-8);
+  font-weight: 800;
+  text-shadow: 0 0 30px rgba(0,212,255,0.3), 0 10px 30px rgba(0,0,0,0.8);
 }
+
+
+
+
 .section-sub {
   font-family: var(--font-body);
-  font-size: 18px;
-  color: var(--text-muted);
-  max-width: 600px;
-  margin-bottom: var(--s-10);
-  line-height: 1.6;
+  font-size: 28px; /* Larger */
+  color: var(--text-strong);
+  max-width: 1000px;
+  margin-bottom: var(--s-16);
+  line-height: 1.4;
   font-style: italic;
+  letter-spacing: 0.1em; /* Spread subhead */
+  opacity: 0.8;
+  font-weight: 400;
 }
+
+
 
 
 .btn-primary {
@@ -283,7 +301,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   justify-content: center; 
-  padding: 160px 48px;
+  padding: 240px 48px;
   margin-bottom: var(--spacing-section);
   text-align: center;
   overflow: hidden; 
@@ -308,9 +326,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 22%; 
-  filter: brightness(0.6) contrast(1.2) saturate(1.2);
+  object-position: center 0%; 
+  transform: scale(1.1) translateY(80px);
+  filter: brightness(0.8) contrast(1.2) saturate(1.2);
 }
+
 
 .hero-video-overlay {
   position: absolute;
