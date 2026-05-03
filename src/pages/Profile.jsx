@@ -134,7 +134,7 @@ export default function Profile() {
                       color: isSelected ? 'var(--success)' : 'var(--text-muted)'
                     }}
                   >
-                    {s} {isSelected && '✓'}
+                    {s}
                   </button>
                 )
               })}

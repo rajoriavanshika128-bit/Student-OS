@@ -88,8 +88,8 @@ export default function Resources() {
                 }}>
                   {r.skill}
                 </span>
-                <span style={{ fontSize: 18, color: 'var(--text-muted)' }}>
-                  {r.type === 'Videos' ? '▶' : r.type === 'Articles' ? '📄' : '🎓'}
+                <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                  {r.type}
                 </span>
               </div>
               <h3 style={{ fontSize: 20, fontFamily: 'var(--font-heading)', color: 'var(--on-dark)', marginBottom: 16, lineHeight: 1.4, letterSpacing: '1px', textTransform: 'uppercase' }}>{r.title}</h3>

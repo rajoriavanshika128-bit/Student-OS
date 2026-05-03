@@ -58,13 +58,13 @@ export default function CelebrationOverlay() {
         }} />
       ))}
       <div className="celebration-card" onClick={e => e.stopPropagation()}>
-        <div className="celebration-emoji">🏆</div>
+
         <div className="celebration-eyebrow">SKILL UNLOCKED</div>
         <h2 className="celebration-skill">{celebrationSkill}</h2>
         <div className="celebration-xp">+{xpCount} XP</div>
         <p className="celebration-sub">Added to your Career DNA</p>
         <button className="btn-primary" onClick={() => { setFadeOut(true); setTimeout(clearCelebration, 300) }} style={{ marginTop: 8 }}>
-          Keep Going →
+          Keep Going
         </button>
       </div>
     </div>

@@ -94,7 +94,7 @@ export default function Missions() {
           background: 'var(--primary)', color: '#000', marginBottom: 40, padding: '24px 32px', display: 'flex', alignItems: 'center', gap: 24, borderRadius: 0, border: 'none',
           animation: 'slideDownBanner 0.5s ease-out forwards' 
         }}>
-          <span style={{ fontSize: 32 }}>🔥</span>
+          
           <div style={{ fontFamily: 'var(--font-heading)', fontSize: 24, letterSpacing: '2px', textTransform: 'uppercase' }}>
             All missions complete — Day Streak +1!
           </div>
@@ -117,7 +117,7 @@ export default function Missions() {
             }} onClick={() => handleCheck(m, i)}>
               <div style={{ position: 'relative', width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div className={`custom-checkbox${isDone ? ' checked' : ''}`} style={{ width: 24, height: 24, borderRadius: 0 }}>
-                  {isDone && '✓'}
+                  
                 </div>
                 {activeRipple === i && <div className="ripple-circle" />}
               </div>

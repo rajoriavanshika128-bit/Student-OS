@@ -47,7 +47,7 @@ export default function Projects() {
             
             <div style={{ marginTop: 'auto', borderTop: '1px solid var(--hairline-strong)', paddingTop: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-                <span style={{ fontSize: 16, opacity: 0.5 }}>⏱</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', letterSpacing: '2px' }}>TIME</span>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '2px' }}>EST. {p.hours} HOURS</span>
               </div>
               

@@ -94,7 +94,7 @@ export default function Roadmap() {
                   </div>
                   <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     {isCurrent && <span className="badge" style={{ border: '1px solid var(--primary)', color: 'var(--primary)' }}>CURRENT</span>}
-                    <span style={{ color: 'var(--on-dark)', fontSize: 24, fontFamily: 'var(--font-mono)' }}>{isOpen ? '−' : '+'}</span>
+                    <span style={{ color: 'var(--on-dark)', fontSize: 14, fontFamily: 'var(--font-mono)', letterSpacing: '2px' }}>{isOpen ? 'COLLAPSE' : 'EXPAND'}</span>
                   </div>
                 </div>
 
@@ -111,7 +111,7 @@ export default function Roadmap() {
                         <div key={ti} onClick={e => { e.stopPropagation(); toggle(mi, ti) }}
                           style={{ display: 'flex', gap: 16, alignItems: 'flex-start', cursor: 'pointer', padding: '16px', border: '1px solid', borderColor: isDone ? 'var(--success)' : 'var(--hairline-strong)', background: 'transparent', transition: 'border-color 0.2s' }}>
                           <div className={`custom-checkbox${isDone ? ' checked' : ''}`} style={{ marginTop: 2 }}>
-                            {isDone && '✓'}
+                            
                           </div>
                           <span style={{ fontSize: 16, color: isDone ? 'var(--text-muted)' : 'var(--text)', textDecoration: isDone ? 'line-through' : 'none', fontFamily: 'var(--font-body)' }}>{task}</span>
                           {!isDone && <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '2px', color: 'var(--warning)', flexShrink: 0 }}>+20 XP</span>}

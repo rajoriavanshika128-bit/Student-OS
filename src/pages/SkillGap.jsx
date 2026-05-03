@@ -109,7 +109,7 @@ export default function SkillGap() {
           </div>
           
           <button className="btn-secondary" style={{ marginTop: 'var(--s-6)', width: '100%' }} onClick={() => window.scrollTo({ top: 1000, behavior: 'smooth' })}>
-            VIEW SPECIFICATIONS ↓
+            VIEW SPECIFICATIONS
           </button>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function SkillGap() {
                 ? <div style={{ fontFamily: 'var(--font-body)', color: 'var(--text-muted)', fontSize: 16 }}>No required competencies verified.</div>
                 : have.map(s => (
                   <div key={s} className="chip selected" style={{ padding: '10px 20px', border: '1px solid var(--primary)' }}>
-                    {s} <span style={{ marginLeft: 8, opacity: 0.4 }}>✓</span>
+                    {s} 
                   </div>
                 ))
               }

@@ -518,7 +518,7 @@ export default function Jobs() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              View Role →
+              View Role
             </button>
           </div>
         ))}
@@ -537,7 +537,7 @@ export default function Jobs() {
               className="modal-close-btn"
               onClick={() => setSelectedJob(null)}
             >
-              ✕
+              CLOSE
             </button>
 
             <div className="modal-top">
@@ -582,7 +582,7 @@ export default function Jobs() {
               className={selectedJob.url !== '#' ? 'modal-apply-btn' : 'modal-apply-btn modal-apply-disabled'}
               onClick={selectedJob.url === '#' ? e => e.preventDefault() : undefined}
             >
-              {selectedJob.url !== '#' ? 'Apply for this Role →' : 'Sample Role — No Link'}
+              {selectedJob.url !== '#' ? 'Apply for this Role' : 'Sample Role — No Link'}
             </a>
           </div>
         </div>

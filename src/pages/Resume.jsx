@@ -109,7 +109,7 @@ export default function Resume() {
             </div>
 
             <div style={{ marginBottom: 32 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--success)', marginBottom: 16 }}>KEYWORDS FOUND ✓</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--success)', marginBottom: 16 }}>KEYWORDS FOUND</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                 {results.found.length > 0 ? results.found.map(s => (
                   <span key={s} className="chip" style={{ border: '1px solid var(--success)', color: 'var(--success)', background: 'transparent', borderRadius: 0, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '2px', textTransform: 'uppercase' }}>{s}</span>
@@ -118,7 +118,7 @@ export default function Resume() {
             </div>
 
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--danger)', marginBottom: 16 }}>MISSING KEYWORDS ⚠</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--danger)', marginBottom: 16 }}>MISSING KEYWORDS</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                 {results.missing.length > 0 ? results.missing.map(s => (
                   <span key={s} className="chip" style={{ border: '1px solid var(--danger)', color: 'var(--danger)', background: 'transparent', borderRadius: 0, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '2px', textTransform: 'uppercase' }}>{s}</span>
@@ -133,7 +133,7 @@ export default function Resume() {
           </div>
         ) : (
           <div className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'var(--text-muted)', borderLeft: '1px solid var(--hairline-strong)', borderRadius: 0, padding: 40 }}>
-            <div style={{ fontSize: 64, marginBottom: 24, opacity: 0.5 }}>📄</div>
+
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: 24, letterSpacing: '2px', color: 'var(--on-dark)', textTransform: 'uppercase', marginBottom: 16 }}>AWAITING RESUME</div>
             <div style={{ fontSize: 14, fontFamily: 'var(--font-body)', maxWidth: 300, lineHeight: 1.6 }}>Paste your resume text and hit analyze to see your ATS match score.</div>
           </div>

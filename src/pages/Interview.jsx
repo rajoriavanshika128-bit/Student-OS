@@ -34,7 +34,7 @@ export default function Interview() {
   if (finished) {
     return (
       <div className="page-enter" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', textAlign: 'center' }}>
-        <div style={{ fontSize: 64, marginBottom: 24 }}>🎯</div>
+        <div style={{ fontSize: 64, marginBottom: 24 }}></div>
         <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 48, marginBottom: 16, letterSpacing: '4px', textTransform: 'uppercase' }}>Practice Complete</h1>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: 'var(--text-muted)', marginBottom: 40, letterSpacing: '2px', textTransform: 'uppercase' }}>You marked {score} out of {questions.length} questions as confident.</p>
         <div style={{ display: 'flex', gap: 16 }}>

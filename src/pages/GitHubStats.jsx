@@ -219,11 +219,11 @@ export default function GitHubStats() {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--hairline)', paddingTop: 16, marginTop: 'auto' }}>
                     <div style={{ display: 'flex', gap: 24, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '2px' }}>
-                      <span><span style={{ color: 'var(--text-muted)' }}>★</span> {r.stargazers_count}</span>
-                      <span>⑂ {r.forks_count}</span>
+                      <span>STARS: {r.stargazers_count}</span>
+                      <span>FORKS: {r.forks_count}</span>
                     </div>
                     <a href={r.html_url} target="_blank" rel="noreferrer" className="btn-ghost" style={{ padding: 0 }}>
-                      VIEW →
+                      VIEW
                     </a>
                   </div>
                 </div>

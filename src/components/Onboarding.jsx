@@ -5,13 +5,13 @@ import './Onboarding.css'
 const SKILLS = ['HTML','CSS','JavaScript','React','Python','Java','Git','SQL','Figma','Node.js','APIs','TypeScript']
 
 const ROLES = [
-  { id: 'Frontend Developer',   icon: '⬡', desc: 'Build beautiful UIs' },
-  { id: 'Backend Developer',    icon: '◉', desc: 'Power server-side systems' },
-  { id: 'Full Stack Developer', icon: '◈', desc: 'Own the full product' },
-  { id: 'UI/UX Designer',       icon: '◫', desc: 'Craft user experiences' },
-  { id: 'Data Analyst',         icon: '◎', desc: 'Turn data into decisions' },
-  { id: 'Product Manager',      icon: '◷', desc: 'Drive product vision' },
-  { id: 'DevOps Engineer',      icon: '⟶', desc: 'Automate & scale systems' },
+  { id: 'Frontend Developer',   desc: 'Build beautiful UIs' },
+  { id: 'Backend Developer',    desc: 'Power server-side systems' },
+  { id: 'Full Stack Developer', desc: 'Own the full product' },
+  { id: 'UI/UX Designer',       desc: 'Craft user experiences' },
+  { id: 'Data Analyst',         desc: 'Turn data into decisions' },
+  { id: 'Product Manager',      desc: 'Drive product vision' },
+  { id: 'DevOps Engineer',      desc: 'Automate & scale systems' },
 ]
 
 function useTypewriter(text, speed = 38) {
@@ -139,7 +139,7 @@ export default function Onboarding() {
                   onClick={() => toggleSkill(s)}
                 >
                   {s}
-                  {skills.includes(s) && <span className="skill-chip-check">✓</span>}
+
                 </button>
               ))}
             </div>
@@ -153,7 +153,7 @@ export default function Onboarding() {
                   className={`role-card${dreamRole === r.id ? ' selected' : ''}`}
                   onClick={() => setDreamRole(r.id)}
                 >
-                  <span className="role-icon">{r.icon}</span>
+
                   <span className="role-name">{r.id}</span>
                   <span className="role-desc">{r.desc}</span>
                 </button>
@@ -170,7 +170,7 @@ export default function Onboarding() {
                   <img src={githubSuccess.avatar_url} alt="Avatar" style={{ width: 64, height: 64, borderRadius: 0, border: '1px solid var(--hairline-strong)' }} />
                   <div>
                     <div style={{ fontFamily: 'var(--font-heading)', fontSize: 24, color: 'var(--on-dark)', letterSpacing: '2px', textTransform: 'uppercase' }}>{githubSuccess.name || githubSuccess.login}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '2px', color: 'var(--primary)', marginTop: 8 }}>✓ GITHUB CONNECTED</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '2px', color: 'var(--primary)', marginTop: 8 }}>GITHUB CONNECTED</div>
                   </div>
                 </div>
               ) : (
@@ -194,7 +194,7 @@ export default function Onboarding() {
 
           <div className="onboarding-actions">
             {step > 0 && (
-              <button className="btn-ghost" onClick={() => setStep(s => s - 1)}>← BACK</button>
+              <button className="btn-ghost" onClick={() => setStep(s => s - 1)}>BACK</button>
             )}
             
             {step === 3 && !githubSuccess ? (
@@ -205,7 +205,7 @@ export default function Onboarding() {
                 disabled={!canAdvance()}
                 onClick={handleNext}
               >
-                {step === 3 ? 'LAUNCH MY OS →' : 'CONTINUE →'}
+                {step === 3 ? 'LAUNCH MY OS' : 'CONTINUE'}
               </button>
             )}
           </div>
