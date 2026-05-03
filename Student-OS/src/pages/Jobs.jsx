@@ -250,20 +250,31 @@ export default function Jobs() {
           justify-content: center;
         }
         .modal-box {
-          background: var(--surface-card);
-          border: 1px solid var(--primary);
+          background: #111;
+          border: 1px solid #333;
+          border-radius: 16px;
           width: 90%;
-          max-width: 600px;
+          max-width: 800px;
           max-height: 90vh;
           overflow-y: auto;
           padding: 40px;
           position: relative;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
         .modal-close-btn {
           position: absolute;
-          top: 20px; right: 20px;
-          background: transparent; border: none;
-          color: var(--text); font-size: 20px; cursor: pointer;
+          top: 24px; right: 24px;
+          background: #222;
+          border: 1px solid #333;
+          border-radius: 50%;
+          width: 36px; height: 36px;
+          display: flex; align-items: center; justify-content: center;
+          color: var(--text-muted); font-size: 16px; cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .modal-close-btn:hover {
+          background: #333;
+          color: #fff;
         }
         .modal-top { margin-bottom: 32px; }
         .modal-type-badge {
@@ -484,7 +495,10 @@ export default function Jobs() {
             key={job.id}
             className="job-card stagger-item"
             style={{ animationDelay: `${i * 60}ms` }}
-            onClick={() => setSelectedJob(job)}
+            onClick={() => {
+              setSelectedJob(job);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <div className="job-info">
               <h3 className="job-title">{job.title}</h3>
@@ -499,8 +513,9 @@ export default function Jobs() {
             <button
               className="view-role-btn"
               onClick={e => {
-                e.stopPropagation()
-                setSelectedJob(job)
+                e.stopPropagation();
+                setSelectedJob(job);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
               View Role →
