@@ -156,18 +156,56 @@ export default function Dashboard() {
 
 function XPRing({ xp, levelInfo }) {
   const pct = levelInfo?.progress || 0
+  
+  let color = '#ff4444' // red
+  let bgRgba = 'rgba(255, 68, 68, 0.15)'
+  
+  if (pct > 25 && pct <= 50) {
+    color = '#f5a623' // amber
+    bgRgba = 'rgba(245, 166, 35, 0.15)'
+  } else if (pct > 50 && pct <= 85) {
+    color = '#4a9eff' // blue
+    bgRgba = 'rgba(74, 158, 255, 0.15)'
+  } else if (pct > 85) {
+    color = '#00e676' // green
+    bgRgba = 'rgba(0, 230, 118, 0.15)'
+  }
+
   const r = 44; const circ = 2 * Math.PI * r
   return (
     <div style={{ position: 'relative', width: 104, height: 104, flexShrink: 0, animation: 'pulse 3s infinite ease-in-out' }}>
-      <svg width="104" height="104" style={{ transform: 'rotate(-90deg)' }}>
-        <circle cx="52" cy="52" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="6" />
-        <circle cx="52" cy="52" r={r} fill="none" stroke="var(--accent)" strokeWidth="6"
+      <svg width="104" height="104" style={{ transform: 'rotate(-90deg)', overflow: 'visible' }}>
+        <circle cx="52" cy="52" r={r} fill="none" stroke={bgRgba} strokeWidth="6" style={{ transition: 'stroke 0.6s ease' }} />
+        <circle cx="52" cy="52" r={r} fill="none" stroke={color} strokeWidth="6"
           strokeDasharray={circ} strokeDashoffset={circ - (circ * pct) / 100}
-          strokeLinecap="round" style={{ transition: 'stroke-dashoffset 1s var(--ease)' }} />
+          strokeLinecap="round" 
+          style={{ 
+            transition: 'stroke-dashoffset 1s var(--ease), stroke 0.6s ease, filter 0.6s ease',
+            filter: `drop-shadow(0 0 8px ${color}) drop-shadow(0 0 16px ${color})`
+          }} 
+        />
       </svg>
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 500, color: 'var(--accent)' }}><AnimatedCounter value={xp} /></span>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>XP</span>
+        <span style={{ 
+          fontFamily: 'var(--font-mono)', 
+          fontSize: 18, 
+          fontWeight: 500, 
+          color: color,
+          textShadow: `0 0 8px ${color}`,
+          transition: 'color 0.6s ease, text-shadow 0.6s ease'
+        }}>
+          <AnimatedCounter value={xp} />
+        </span>
+        <span style={{ 
+          fontFamily: 'var(--font-mono)', 
+          fontSize: 9, 
+          color: color,
+          opacity: 0.7,
+          textTransform: 'uppercase',
+          transition: 'color 0.6s ease'
+        }}>
+          XP
+        </span>
       </div>
     </div>
   )
