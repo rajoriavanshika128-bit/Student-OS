@@ -26,9 +26,9 @@ export default function Profile() {
   const getColor = (dateString) => {
     const count = activityCounts[dateString] || 0
     if (count === 0) return 'rgba(255,255,255,0.04)'
-    if (count === 1) return 'rgba(232,213,183,0.30)'
-    if (count === 2) return 'rgba(232,213,183,0.60)'
-    return 'rgba(232,213,183,0.95)'
+    if (count === 1) return 'rgba(74,222,128,0.30)'
+    if (count === 2) return 'rgba(74,222,128,0.60)'
+    return 'rgba(74,222,128,0.95)'
   }
 
   useEffect(() => {
@@ -55,9 +55,9 @@ export default function Profile() {
           const count = dateCounts[dateStr] || 0
           
           let color = 'rgba(255,255,255,0.04)'
-          if (count === 1) color = 'rgba(232,213,183,0.3)'
-          if (count === 2) color = 'rgba(232,213,183,0.6)'
-          if (count >= 3) color = 'rgba(232,213,183,0.95)'
+          if (count === 1) color = 'rgba(74,222,128,0.3)'
+          if (count === 2) color = 'rgba(74,222,128,0.6)'
+          if (count >= 3) color = 'rgba(74,222,128,0.95)'
           
           squares.push({ date: dateStr, count, color })
         }
@@ -253,10 +253,10 @@ export default function Profile() {
               ))}
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 6, marginTop: 16, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '2px', color: 'var(--text-muted)' }}>
-              LESS <div style={{ width: 10, height: 10, background: 'var(--surface-elevated)' }}/>
-              <div style={{ width: 10, height: 10, background: 'rgba(255,255,255,0.3)' }}/>
-              <div style={{ width: 10, height: 10, background: 'rgba(255,255,255,0.6)' }}/>
-              <div style={{ width: 10, height: 10, background: 'var(--primary)' }}/> MORE
+              LESS <div style={{ width: 10, height: 10, background: 'rgba(255,255,255,0.04)' }}/>
+              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.3)' }}/>
+              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.6)' }}/>
+              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.95)' }}/> MORE
             </div>
             
             <div style={{ marginTop: 40, borderTop: '1px solid var(--hairline-strong)', paddingTop: 24 }}>
