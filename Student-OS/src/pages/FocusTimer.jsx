@@ -99,19 +99,18 @@ export default function FocusTimer() {
             {mode}
           </div>
           
-          <div style={{ position: 'relative', width: 320, height: 320, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 40 }}>
-            <svg width="320" height="320" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
-              <circle cx="160" cy="160" r={r} fill="none" stroke="var(--surface-elevated)" strokeWidth="2" />
-              <circle cx="160" cy="160" r={r} fill="none" 
-                stroke={mode === 'Focus Session' ? 'var(--primary)' : 'var(--success)'} 
+          <div style={{ position: 'relative', width: 200, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 40px' }}>
+            <svg width="200" height="200" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#1A1A1A" strokeWidth="2" />
+              <circle cx="100" cy="100" r="80" fill="none" 
+                stroke={mode === 'Focus Session' ? '#E8D5B7' : '#4ADE80'} 
                 strokeWidth="4"
-                strokeDasharray={circ} 
-                strokeDashoffset={circ * (pct / 100)}
-                strokeLinecap="square" 
-                style={{ transition: 'stroke-dashoffset 1s linear' }} 
+                strokeDasharray="502.65" 
+                strokeDashoffset={502.65 * (1 - (timeLeft / totalDuration))}
+                style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.5s ease' }} 
               />
             </svg>
-            <div className={isActive ? 'heartbeat' : ''} style={{ fontFamily: 'var(--font-heading)', fontSize: 100, fontWeight: 400, color: 'var(--on-dark)', letterSpacing: '4px' }}>
+            <div className={isActive ? 'heartbeat' : ''} style={{ position: 'absolute', fontFamily: 'var(--font-heading)', fontSize: 48, fontWeight: 400, color: 'var(--on-dark)', letterSpacing: '4px' }}>
               {formatTime(timeLeft)}
             </div>
           </div>

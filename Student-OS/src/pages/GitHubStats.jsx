@@ -109,11 +109,18 @@ export default function GitHubStats() {
       )}
 
       {loading && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <div className="skeleton" style={{ height: 120 }} />
-          <div className="grid-4"><div className="skeleton" style={{ height: 100 }} /><div className="skeleton" style={{ height: 100 }} /><div className="skeleton" style={{ height: 100 }} /><div className="skeleton" style={{ height: 100 }} /></div>
-          <div className="skeleton" style={{ height: 60 }} />
-          <div className="grid-2"><div className="skeleton" style={{ height: 120 }} /><div className="skeleton" style={{ height: 120 }} /></div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="skeleton card-elevated" style={{ height: 154, width: '100%', border: '1px solid var(--hairline-strong)', padding: 0, marginBottom: 'var(--spacing-section)' }} />
+          <div className="grid-4" style={{ marginBottom: 'var(--spacing-section)' }}>
+            {[1, 2, 3, 4].map(i => <div key={i} className="skeleton stat-card" style={{ height: 86, border: 'none', borderLeft: '1px solid var(--hairline-strong)' }} />)}
+          </div>
+          <div className="skeleton card" style={{ height: 160, width: '100%', border: '1px solid var(--hairline)', padding: 0, marginBottom: 'var(--spacing-section)' }} />
+          <div className="section-label" style={{ marginBottom: 32 }}>Top Repositories</div>
+          <div className="grid-2">
+            {[1, 2, 3, 4, 5, 6].map(i => (
+              <div key={i} className="skeleton card-elevated" style={{ height: 218, width: '100%', border: '1px solid var(--hairline-strong)', padding: 0 }} />
+            ))}
+          </div>
         </div>
       )}
 

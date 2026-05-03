@@ -441,7 +441,7 @@ button:active, .btn-primary:active, .btn-secondary:active, .btn-ghost:active {
   100% { background-position: 200% 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #0a0a0a 25%, #141414 50%, #0a0a0a 75%);
+  background: linear-gradient(90deg, #1A1A1A 25%, #242424 50%, #1A1A1A 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite linear;
   border-radius: 0;
