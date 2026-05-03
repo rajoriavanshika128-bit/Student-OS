@@ -5,8 +5,13 @@ import HeroVideo from '../components/HeroVideo'
 export default function FocusTimer() {
   const { addXP, incrementFocusSessions } = useDNA()
   const [mode, setMode] = useState('Focus Session') 
-  const [timeLeft, setTimeLeft] = useState(25 * 60)
+  const [customFocusDuration, setCustomFocusDuration] = useState(() => {
+    return parseInt(localStorage.getItem('studentos_custom_focus') || String(25 * 60), 10)
+  })
+  const [timeLeft, setTimeLeft] = useState(customFocusDuration)
   const [isActive, setIsActive] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [editMinutes, setEditMinutes] = useState(String(customFocusDuration / 60))
   const timerRef = useRef(null)
 
   const [history, setHistory] = useState(() => {
@@ -43,7 +48,7 @@ export default function FocusTimer() {
       setTimeLeft(5 * 60)
     } else {
       setMode('Focus Session')
-      setTimeLeft(25 * 60)
+      setTimeLeft(customFocusDuration)
     }
   }
 
@@ -53,7 +58,7 @@ export default function FocusTimer() {
 
   function resetTimer() {
     setIsActive(false)
-    setTimeLeft(mode === 'Focus Session' ? 25 * 60 : 5 * 60)
+    setTimeLeft(mode === 'Focus Session' ? customFocusDuration : 5 * 60)
   }
 
   function formatTime(seconds) {
@@ -62,7 +67,32 @@ export default function FocusTimer() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
   }
 
-  const totalDuration = mode === 'Focus Session' ? 25 * 60 : 5 * 60
+  function handleEditClick() {
+    if (!isActive && mode === 'Focus Session') {
+      setEditMinutes(String(Math.floor(customFocusDuration / 60)))
+      setIsEditing(true)
+    }
+  }
+
+  function saveEdit() {
+    setIsEditing(false)
+    const mins = parseInt(editMinutes, 10)
+    if (!isNaN(mins) && mins > 0) {
+      const newSecs = mins * 60
+      setCustomFocusDuration(newSecs)
+      localStorage.setItem('studentos_custom_focus', String(newSecs))
+      setTimeLeft(newSecs)
+    } else {
+      setEditMinutes(String(Math.floor(customFocusDuration / 60)))
+    }
+  }
+
+  function handleEditKeyDown(e) {
+    if (e.key === 'Enter') saveEdit()
+    if (e.key === 'Escape') setIsEditing(false)
+  }
+
+  const totalDuration = mode === 'Focus Session' ? customFocusDuration : 5 * 60
   const pct = ((totalDuration - timeLeft) / totalDuration) * 100
   const r = 120
   const circ = 2 * Math.PI * r
@@ -85,6 +115,26 @@ export default function FocusTimer() {
 
   return (
     <div className="page-enter">
+      <style>{`
+        .editable-time:hover::after {
+          content: '✎';
+          position: absolute;
+          right: -32px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 24px;
+          opacity: 0.5;
+        }
+        /* Remove arrows from number input */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+      `}</style>
       <div className="hero-photo-band">
         <HeroVideo />
         <div className="section-label">Deep Work</div>
@@ -110,8 +160,29 @@ export default function FocusTimer() {
                 style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.5s ease' }} 
               />
             </svg>
-            <div className={isActive ? 'heartbeat' : ''} style={{ position: 'absolute', fontFamily: 'var(--font-heading)', fontSize: 48, fontWeight: 400, color: 'var(--on-dark)', letterSpacing: '4px' }}>
-              {formatTime(timeLeft)}
+            <div className={isActive ? 'heartbeat' : ''} style={{ position: 'absolute', fontFamily: 'var(--font-heading)', fontSize: 48, fontWeight: 400, color: 'var(--on-dark)', letterSpacing: '4px', textAlign: 'center' }}>
+              {isEditing ? (
+                <input 
+                  autoFocus
+                  type="number"
+                  min="1"
+                  max="120"
+                  value={editMinutes}
+                  onChange={e => setEditMinutes(e.target.value)}
+                  onBlur={saveEdit}
+                  onKeyDown={handleEditKeyDown}
+                  style={{ width: '80px', background: 'transparent', border: 'none', color: 'var(--on-dark)', fontFamily: 'var(--font-heading)', fontSize: 48, textAlign: 'center', outline: 'none' }}
+                />
+              ) : (
+                <div 
+                  onClick={handleEditClick} 
+                  title={!isActive && mode === 'Focus Session' ? "Click to edit duration" : ""}
+                  style={{ cursor: !isActive && mode === 'Focus Session' ? 'pointer' : 'default', position: 'relative' }}
+                  className={!isActive && mode === 'Focus Session' ? "editable-time" : ""}
+                >
+                  {formatTime(timeLeft)}
+                </div>
+              )}
             </div>
           </div>
           
@@ -122,6 +193,29 @@ export default function FocusTimer() {
             <button className="btn-secondary" onClick={resetTimer} style={{ width: 160, justifyContent: 'center' }}>
               RESET
             </button>
+            {!isEditing ? (
+              <button 
+                className="btn-secondary" 
+                onClick={handleEditClick} 
+                style={{ 
+                  width: 160, 
+                  justifyContent: 'center', 
+                  opacity: (!isActive && mode === 'Focus Session') ? 1 : 0.5, 
+                  pointerEvents: (!isActive && mode === 'Focus Session') ? 'auto' : 'none' 
+                }}
+                disabled={isActive || mode !== 'Focus Session'}
+              >
+                EDIT TIME
+              </button>
+            ) : (
+              <button 
+                className="btn-primary" 
+                onClick={saveEdit} 
+                style={{ width: 160, justifyContent: 'center' }}
+              >
+                SAVE TIME
+              </button>
+            )}
           </div>
         </div>
 
