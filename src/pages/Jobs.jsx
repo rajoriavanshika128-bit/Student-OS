@@ -486,90 +486,93 @@ export default function Jobs() {
         </div>
       )}
 
-      {selectedJob !== null && (
-        <div ref={detailCardRef} className="detail-card">
-          <button
-            className="modal-close-btn"
-            onClick={() => setSelectedJob(null)}
-          >
-            CLOSE
-          </button>
 
-          <div className="modal-top">
-            <span className="modal-type-badge">{selectedJob.type}</span>
-            <h2 className="modal-job-title">{selectedJob.title}</h2>
-            <p className="modal-job-company">{selectedJob.company}</p>
-          </div>
-
-          <div className="modal-meta-row">
-            <div className="modal-meta-item">
-              <span className="modal-meta-label">Location</span>
-              <span className="modal-meta-value">{selectedJob.location}</span>
-            </div>
-            <div className="modal-meta-item">
-              <span className="modal-meta-label">Salary</span>
-              <span className="modal-meta-value">{selectedJob.salary}</span>
-            </div>
-            <div className="modal-meta-item">
-              <span className="modal-meta-label">Posted</span>
-              <span className="modal-meta-value">{selectedJob.postedDate}</span>
-            </div>
-          </div>
-
-          <div className="modal-section">
-            <p className="modal-section-label">About this role</p>
-            <p className="modal-desc">{selectedJob.description}</p>
-          </div>
-
-          <div className="modal-section">
-            <p className="modal-section-label">Your matching skills</p>
-            <div className="modal-skill-row">
-              {(dna.skills || []).map(skill => (
-                <span key={skill} className="modal-skill-chip">{skill}</span>
-              ))}
-            </div>
-          </div>
-
-          <a
-            href={selectedJob.url !== '#' ? selectedJob.url : undefined}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={selectedJob.url !== '#' ? 'modal-apply-btn' : 'modal-apply-btn modal-apply-disabled'}
-            onClick={selectedJob.url === '#' ? e => e.preventDefault() : undefined}
-          >
-            {selectedJob.url !== '#' ? 'Apply for this Role' : 'Sample Role — No Link'}
-          </a>
-        </div>
-      )}
 
       <div key={`${filter}-${sortBy}-${salaryRange}`}>
         {displayedJobs.map((job, i) => (
-          <div
-            key={job.id}
-            className="job-card stagger-item"
-            style={{ animationDelay: `${i * 60}ms` }}
-            onClick={() => setSelectedJob(job)}
-          >
-            <div className="job-info">
-              <h3 className="job-title">{job.title}</h3>
-              <p className="job-company">{job.company}</p>
-              <div className="job-tags">
-                <span className="job-tag">{job.location}</span>
-                <span className="job-tag">{job.salary}</span>
-                <span className="job-tag">{job.type}</span>
+          <React.Fragment key={job.id}>
+            {selectedJob?.id === job.id ? (
+              <div ref={detailCardRef} className="detail-card stagger-item" style={{ animationDelay: `${i * 60}ms` }}>
+                <button
+                  className="modal-close-btn"
+                  onClick={() => setSelectedJob(null)}
+                >
+                  CLOSE
+                </button>
+
+                <div className="modal-top">
+                  <span className="modal-type-badge">{job.type}</span>
+                  <h2 className="modal-job-title">{job.title}</h2>
+                  <p className="modal-job-company">{job.company}</p>
+                </div>
+
+                <div className="modal-meta-row">
+                  <div className="modal-meta-item">
+                    <span className="modal-meta-label">Location</span>
+                    <span className="modal-meta-value">{job.location}</span>
+                  </div>
+                  <div className="modal-meta-item">
+                    <span className="modal-meta-label">Salary</span>
+                    <span className="modal-meta-value">{job.salary}</span>
+                  </div>
+                  <div className="modal-meta-item">
+                    <span className="modal-meta-label">Posted</span>
+                    <span className="modal-meta-value">{job.postedDate}</span>
+                  </div>
+                </div>
+
+                <div className="modal-section">
+                  <p className="modal-section-label">About this role</p>
+                  <p className="modal-desc">{job.description}</p>
+                </div>
+
+                <div className="modal-section">
+                  <p className="modal-section-label">Your matching skills</p>
+                  <div className="modal-skill-row">
+                    {(dna.skills || []).map(skill => (
+                      <span key={skill} className="modal-skill-chip">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <a
+                  href={job.url !== '#' ? job.url : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={job.url !== '#' ? 'modal-apply-btn' : 'modal-apply-btn modal-apply-disabled'}
+                  onClick={job.url === '#' ? e => e.preventDefault() : undefined}
+                >
+                  {job.url !== '#' ? 'Apply for this Role' : 'Sample Role — No Link'}
+                </a>
               </div>
-              <p className="job-posted">{job.postedDate}</p>
-            </div>
-            <button
-              className="view-role-btn"
-              onClick={e => {
-                e.stopPropagation();
-                setSelectedJob(job);
-              }}
-            >
-              View Role
-            </button>
-          </div>
+            ) : (
+              <div
+                className="job-card stagger-item"
+                style={{ animationDelay: `${i * 60}ms` }}
+                onClick={() => setSelectedJob(job)}
+              >
+                <div className="job-info">
+                  <h3 className="job-title">{job.title}</h3>
+                  <p className="job-company">{job.company}</p>
+                  <div className="job-tags">
+                    <span className="job-tag">{job.location}</span>
+                    <span className="job-tag">{job.salary}</span>
+                    <span className="job-tag">{job.type}</span>
+                  </div>
+                  <p className="job-posted">{job.postedDate}</p>
+                </div>
+                <button
+                  className="view-role-btn"
+                  onClick={e => {
+                    e.stopPropagation();
+                    setSelectedJob(job);
+                  }}
+                >
+                  View Role
+                </button>
+              </div>
+            )}
+          </React.Fragment>
         ))}
       </div>
     </div>
