@@ -93,7 +93,17 @@ export default function Resources() {
                 </span>
               </div>
               <h3 style={{ fontSize: 20, fontFamily: 'var(--font-heading)', color: 'var(--on-dark)', marginBottom: 16, lineHeight: 1.4, letterSpacing: '1px', textTransform: 'uppercase' }}>{r.title}</h3>
-              <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', letterSpacing: '2px', color: 'var(--text-muted)', marginTop: 'auto', paddingTop: 24, borderTop: '1px solid var(--hairline-strong)', textTransform: 'uppercase' }}>SOURCE: {r.source}</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: 24, borderTop: '1px solid var(--hairline-strong)' }}>
+                <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>SOURCE: {r.source}</div>
+                <a 
+                  href={r.url || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: 11, fontFamily: 'var(--font-mono)', letterSpacing: '2px', color: 'var(--primary)', textTransform: 'uppercase', textDecoration: 'none' }}
+                >
+                  VISIT ↗
+                </a>
+              </div>
             </div>
           )
         })}
