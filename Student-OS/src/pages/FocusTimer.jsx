@@ -160,7 +160,7 @@ export default function FocusTimer() {
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>TOTAL SESSIONS</div>
                 <div style={{ fontSize: 32, fontFamily: 'var(--font-heading)', color: 'var(--primary)', letterSpacing: '2px' }}>
-                  {Object.values(history).reduce((a, b) => a + b, 0)}
+                  <FocusSessionCounter targetValue={Object.values(history).reduce((a, b) => a + b, 0)} />
                 </div>
               </div>
             </div>
@@ -176,4 +176,25 @@ export default function FocusTimer() {
       </div>
     </div>
   )
+}
+
+function FocusSessionCounter({ targetValue }) {
+  const [displayValue, setDisplayValue] = useState(targetValue)
+
+  useEffect(() => {
+    if (displayValue < targetValue) {
+      const interval = setInterval(() => {
+        setDisplayValue(prev => {
+          if (prev + 1 >= targetValue) {
+            clearInterval(interval)
+            return targetValue
+          }
+          return prev + 1
+        })
+      }, 30)
+      return () => clearInterval(interval)
+    }
+  }, [targetValue, displayValue])
+
+  return <span>{Math.round(displayValue)}</span>
 }

@@ -142,7 +142,7 @@ export default function GitHubStats() {
               <div style={{ display: 'flex', gap: 24, marginTop: 16, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', letterSpacing: '2px' }}>
                 <span><strong style={{ color: 'var(--on-dark)' }}>{userData.followers}</strong> FLW</span>
                 <span><strong style={{ color: 'var(--on-dark)' }}>{userData.following}</strong> FLG</span>
-                <span><strong style={{ color: 'var(--on-dark)' }}>{userData.public_repos}</strong> REP</span>
+                <span><strong style={{ color: 'var(--on-dark)' }}><AnimatedCounter value={userData.public_repos} /></strong> REP</span>
               </div>
             </div>
           </div>

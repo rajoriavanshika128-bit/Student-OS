@@ -20,7 +20,6 @@ export default function SkillGap() {
   useEffect(() => {
     const t = setTimeout(() => {
       setBarWidth(pct)
-      setFlash(true)
     }, 100)
     return () => clearTimeout(t)
   }, [pct])
@@ -69,10 +68,10 @@ export default function SkillGap() {
           <div style={{ 
             fontFamily: 'var(--font-heading)', fontSize: 160, fontWeight: 300, lineHeight: 0.9, letterSpacing: '-2px',
             color: pct === 100 ? 'var(--success)' : 'var(--on-dark)',
-            animation: flash ? 'greenFlash 0.6s ease 0.8s' : 'none',
+            animation: flash ? 'greenFlash 0.6s ease' : 'none',
             margin: 'var(--s-4) 0'
           }}>
-            <AnimatedCounter value={pct} />
+            <AnimatedCounter value={pct} onComplete={() => setFlash(true)} />
             <span style={{ fontSize: 40, verticalAlign: 'top', marginLeft: 8 }}>%</span>
           </div>
           

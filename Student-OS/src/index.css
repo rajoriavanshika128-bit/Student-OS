@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--hairline);
   border-radius: var(--radius);
   padding: var(--s-5);
-  transition: all 0.3s var(--ease);
+  transition: all 0.3s var(--ease), transform 0.25s ease, border-color 0.25s ease;
   position: relative;
   overflow: hidden;
 }
@@ -138,8 +138,9 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--surface-elevated);
   border-color: var(--hairline-strong);
 }
-.card:hover {
-  border-color: var(--hairline-strong);
+.card:hover, .card-elevated:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232, 213, 183, 0.3);
 }
 
 
@@ -259,6 +260,10 @@ h1, h2, h3, h4, h5, h6 {
 .btn-ghost:hover { color: var(--on-dark); }
 .btn-ghost:hover::after { width: 100%; }
 
+button:active, .btn-primary:active, .btn-secondary:active, .btn-ghost:active {
+  transform: scale(0.97);
+  transition: transform 0.05s ease;
+}
 
 .chip {
   display: inline-flex;
@@ -380,8 +385,12 @@ h1, h2, h3, h4, h5, h6 {
 .progress-bar-fill {
   height: 100%;
   border-radius: 0;
-  background: var(--primary);
-  transition: width 0.8s var(--ease);
+  background: rgb(232, 213, 183);
+  animation: fillProgress 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fillProgress {
+  from { width: 0%; }
 }
 
 
@@ -447,10 +456,11 @@ h1, h2, h3, h4, h5, h6 {
   padding: 12px 0px;
   width: 100%;
   outline: none;
-  transition: border-color 0.2s var(--ease);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 .input-field:focus { 
-  border-color: var(--primary); 
+  border-color: rgba(232, 213, 183, 1); 
+  box-shadow: 0 0 0 2px rgba(232, 213, 183, 0.2);
 }
 .input-field::placeholder { color: var(--text-muted); }
 
