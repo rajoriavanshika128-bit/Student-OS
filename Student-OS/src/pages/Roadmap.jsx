@@ -4,7 +4,7 @@ import { ROADMAP_DATA } from '../data/roadmapData'
 import HeroVideo from '../components/HeroVideo'
 
 export default function Roadmap() {
-  const { dna, addXP } = useDNA()
+  const { dna, addXP, setDna } = useDNA()
   const milestones = ROADMAP_DATA[dna.dreamRole] || []
   const [expanded, setExpanded] = useState(0)
   const [checked, setChecked] = useState(() => {
@@ -13,16 +13,29 @@ export default function Roadmap() {
 
   function toggle(milestoneIdx, taskIdx) {
     const key = `${milestoneIdx}-${taskIdx}`
-    if (checked[key]) return
-    const next = { ...checked, [key]: true }
-    setChecked(next)
-    localStorage.setItem('studentos_roadmap', JSON.stringify(next))
-    addXP(20, 'Roadmap Task')
+    if (checked[key]) {
+      const next = { ...checked }
+      delete next[key]
+      setChecked(next)
+      localStorage.setItem('studentos_roadmap', JSON.stringify(next))
+      setDna(prev => ({ ...prev, xp: Math.max(0, prev.xp - 20) }))
 
-    const today = new Date().toISOString().split('T')[0]
-    const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
-    existingLog.push(today)
-    localStorage.setItem('activityLog', JSON.stringify(existingLog))
+      const today = new Date().toISOString().split('T')[0]
+      const log = JSON.parse(localStorage.getItem('activityLog') || '[]')
+      const idx = log.lastIndexOf(today)
+      if (idx !== -1) log.splice(idx, 1)
+      localStorage.setItem('activityLog', JSON.stringify(log))
+    } else {
+      const next = { ...checked, [key]: true }
+      setChecked(next)
+      localStorage.setItem('studentos_roadmap', JSON.stringify(next))
+      addXP(20, 'Roadmap Task')
+
+      const today = new Date().toISOString().split('T')[0]
+      const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
+      existingLog.push(today)
+      localStorage.setItem('activityLog', JSON.stringify(existingLog))
+    }
   }
 
   const [lineHeight, setLineHeight] = useState(0)
