@@ -49,7 +49,7 @@ export default function Dashboard() {
 
      
       <div className="card-elevated" style={{ marginBottom: 'var(--s-12)', borderTop: '4px solid var(--primary)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-10)' }}>
+        <div className="dna-card-inner" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-10)' }}>
           {githubUser?.avatar_url ? (
             <div style={{ width: 140, height: 140, border: '1px solid var(--hairline-strong)', padding: 4 }}>
               <img src={githubUser.avatar_url} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -60,7 +60,7 @@ export default function Dashboard() {
           
           <div style={{ flex: 1 }}>
             <div className="section-label">DNA SEQUENCE</div>
-            <div style={{ fontFamily: 'var(--font-heading)', fontSize: 40, letterSpacing: '4px', color: 'var(--on-dark)', textTransform: 'uppercase' }}>
+            <div className="dna-role-title" style={{ fontFamily: 'var(--font-heading)', fontSize: 40, letterSpacing: '4px', color: 'var(--on-dark)', textTransform: 'uppercase' }}>
               {dna.dreamRole}
             </div>
             <div style={{ fontFamily: 'var(--font-body)', fontSize: 18, color: 'var(--text-muted)', marginTop: 8, fontStyle: 'italic' }}>

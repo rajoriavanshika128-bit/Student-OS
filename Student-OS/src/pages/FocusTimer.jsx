@@ -100,7 +100,7 @@ export default function FocusTimer() {
           </div>
           
           <div style={{ position: 'relative', width: 200, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 40px' }}>
-            <svg width="200" height="200" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
+            <svg viewBox="0 0 200 200" width="200" height="200" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
               <circle cx="100" cy="100" r="80" fill="none" stroke="#1A1A1A" strokeWidth="2" />
               <circle cx="100" cy="100" r="80" fill="none" 
                 stroke={mode === 'Focus Session' ? '#E8D5B7' : '#4ADE80'} 

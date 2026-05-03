@@ -166,7 +166,7 @@ export default function Profile() {
         <div>
           <div className="card-elevated" style={{ marginBottom: 'var(--s-8)', borderTop: '4px solid var(--primary)' }}>
             <div className="section-label">SYSTEM IDENTIFIER</div>
-            <div style={{ fontFamily: 'var(--font-heading)', fontSize: 48, color: 'var(--on-dark)', marginBottom: 8, letterSpacing: '4px', textTransform: 'uppercase', fontWeight: 300 }}>
+            <div className="profile-role-title" style={{ fontFamily: 'var(--font-heading)', fontSize: 48, color: 'var(--on-dark)', marginBottom: 8, letterSpacing: '4px', textTransform: 'uppercase', fontWeight: 300 }}>
               {dna.dreamRole}
             </div>
             <div style={{ fontSize: 18, color: 'var(--text-muted)', marginBottom: 'var(--s-8)', fontFamily: 'var(--font-body)', fontStyle: 'italic' }}>{dna.degree}</div>

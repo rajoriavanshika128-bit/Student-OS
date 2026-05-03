@@ -309,17 +309,103 @@ export default function Jobs() {
         .empty-state { padding: 60px; text-align: center; border: 1px solid var(--hairline-strong); }
         .clear-btn { background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 12px 24px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; margin-top: 24px; transition: all 0.3s var(--ease); }
         .clear-btn:hover { background: var(--primary); color: #000; }
+        .filter-tabs {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #111;
+          padding: 6px;
+          border-radius: 9999px;
+          border: 1px solid var(--hairline-strong);
+          width: 100%;
+          max-width: 900px;
+        }
         .tab-btn {
-          padding: 12px 24px; border-radius: 0; font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 2px; text-transform: uppercase; font-weight: 400; color: var(--text-muted);
-          border: 1px solid transparent; border-bottom: 1px solid var(--hairline); background: transparent;
-          transition: all 0.2s ease; cursor: pointer;
+          flex: 1;
+          text-align: center;
+          padding: 10px 0;
+          border-radius: 9999px;
+          font-family: var(--font-mono);
+          font-size: 11px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-weight: 500;
+          color: var(--text-muted);
+          border: none;
+          background: transparent;
+          transition: all 0.3s var(--ease);
+          cursor: pointer;
+        }
+        .tab-btn:hover {
+          color: var(--on-dark);
         }
         .tab-active {
-          color: var(--on-dark); border-bottom: 1px solid var(--primary); background: transparent;
+          color: #fff !important;
+          background: #2563EB !important;
         }
-        .controls-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid var(--hairline-strong); padding-bottom: 16px; }
-        .filter-tabs { display: flex; gap: 0; }
+        .controls-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 40px;
+          border-bottom: 1px solid var(--hairline-strong);
+          padding-bottom: 16px;
+        }
+        .sort-select-pill {
+          background: #111; color: var(--text-muted); border: 1px solid var(--hairline-strong);
+          padding: 10px 20px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; outline: none; cursor: pointer;
+          border-radius: 9999px;
+          appearance: none;
+          background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23999999%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1em top 50%;
+          background-size: .65em auto;
+          padding-right: 36px;
+          transition: all 0.3s var(--ease);
+        }
+        .sort-select-pill:hover { border-color: var(--text-muted); }
+
+        @media (max-width: 768px) {
+          .job-card {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 20px;
+            padding: 24px 16px;
+          }
+          .job-info { width: 100%; }
+          .job-tags { flex-wrap: wrap; gap: 8px; }
+          .view-role-btn {
+            width: 100% !important;
+            text-align: center;
+            padding: 14px 16px;
+          }
+          .controls-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+          .filter-tabs {
+            overflow-x: auto;
+            white-space: nowrap;
+            width: 100%;
+            padding-bottom: 4px;
+            justify-content: flex-start;
+          }
+          .tab-btn {
+            flex: 0 0 auto;
+            padding: 10px 24px;
+          }
+          .modal-box {
+            width: 95vw !important;
+            max-width: 95vw !important;
+            max-height: 90vh !important;
+            padding: 24px 16px;
+          }
+          .modal-meta-row {
+            flex-wrap: wrap;
+            gap: 16px;
+          }
+        }
       `}</style>
 
       <div className="hero-photo-band">
@@ -329,7 +415,7 @@ export default function Jobs() {
         <div className="section-sub">Live opportunities for {dna.dreamRole}</div>
       </div>
 
-      <div className="controls-row">
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40, marginTop: 60, width: '100%', padding: '0 24px' }}>
         <div className="filter-tabs">
           {['All', 'Remote', 'Full-time', 'Internship'].map(f => (
             <button
@@ -337,15 +423,27 @@ export default function Jobs() {
               onClick={() => setFilter(f)}
               className={filter === f ? 'tab-btn tab-active' : 'tab-btn'}
             >
-              {f}
+              {f === 'All' ? 'All Roles' : f}
             </button>
           ))}
         </div>
-        <div>
+      </div>
+
+      <div style={{ textAlign: 'center', marginBottom: 60 }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 48, color: 'var(--on-dark)', marginBottom: 12, letterSpacing: '-1px', fontWeight: 600, textTransform: 'none' }}>Global Opportunity Index</h1>
+        <div style={{ color: 'var(--text-muted)', fontSize: 16 }}>Live roles fetched in real-time via the Adzuna API.</div>
+      </div>
+
+      <div className="controls-row">
+        <p className="results-count" style={{ margin: 0 }}>
+          {displayedJobs.length} role{displayedJobs.length !== 1 ? 's' : ''} found
+          {filter !== 'All' && ` · ${filter}`}
+        </p>
+        <div style={{ display: 'flex', gap: 12 }}>
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value)}
-            className="sort-select"
+            className="sort-select-pill"
           >
             <option value="Relevance">Sort: Relevance</option>
             <option value="Salary">Sort: Salary High to Low</option>
@@ -354,7 +452,7 @@ export default function Jobs() {
           <select
             value={salaryRange}
             onChange={e => setSalaryRange(e.target.value)}
-            className="sort-select"
+            className="sort-select-pill"
           >
             <option value="Any">Any Salary</option>
             <option value="Under 50">Under $50K</option>
@@ -363,11 +461,6 @@ export default function Jobs() {
           </select>
         </div>
       </div>
-
-      <p className="results-count">
-        {displayedJobs.length} role{displayedJobs.length !== 1 ? 's' : ''} found
-        {filter !== 'All' && ` · ${filter}`}
-      </p>
 
       {displayedJobs.length === 0 && (
         <div className="empty-state">
