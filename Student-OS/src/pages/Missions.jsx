@@ -67,6 +67,11 @@ export default function Missions() {
     addXP(m.xp, 'Mission Complete')
     completeMission(m.id)
 
+    const today = new Date().toISOString().split('T')[0]
+    const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
+    existingLog.push(today)
+    localStorage.setItem('activityLog', JSON.stringify(existingLog))
+
     setTimeout(() => {
       setActiveRipple(null)
       setActivePulse(null)

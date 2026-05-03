@@ -176,7 +176,13 @@ export default function SkillGap() {
                         </div>
                       )}
                     </div>
-                    <button className="btn-secondary" style={{ padding: '12px 24px', fontSize: 10 }} onClick={() => markSkillLearned(s)}>
+                    <button className="btn-secondary" style={{ padding: '12px 24px', fontSize: 10 }} onClick={() => {
+                      markSkillLearned(s)
+                      const today = new Date().toISOString().split('T')[0]
+                      const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
+                      existingLog.push(today)
+                      localStorage.setItem('activityLog', JSON.stringify(existingLog))
+                    }}>
                       {isDetected ? 'SYNCHRONIZE' : 'INTEGRATE'}
                     </button>
                   </div>

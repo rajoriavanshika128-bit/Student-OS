@@ -18,6 +18,11 @@ export default function Roadmap() {
     setChecked(next)
     localStorage.setItem('studentos_roadmap', JSON.stringify(next))
     addXP(20, 'Roadmap Task')
+
+    const today = new Date().toISOString().split('T')[0]
+    const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
+    existingLog.push(today)
+    localStorage.setItem('activityLog', JSON.stringify(existingLog))
   }
 
   const [lineHeight, setLineHeight] = useState(0)

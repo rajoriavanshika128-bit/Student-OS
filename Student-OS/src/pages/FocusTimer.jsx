@@ -28,9 +28,14 @@ export default function FocusTimer() {
     if (mode === 'Focus Session') {
       addXP(30, 'Focus Session Complete')
       incrementFocusSessions()
+
+      const today = new Date().toISOString().split('T')[0]
+      const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
+      existingLog.push(today)
+      localStorage.setItem('activityLog', JSON.stringify(existingLog))
       
-      const today = new Date().toLocaleDateString()
-      const newHistory = { ...history, [today]: (history[today] || 0) + 1 }
+      const localDateStr = new Date().toLocaleDateString()
+      const newHistory = { ...history, [localDateStr]: (history[localDateStr] || 0) + 1 }
       setHistory(newHistory)
       localStorage.setItem('studentos_focus_history', JSON.stringify(newHistory))
      

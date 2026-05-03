@@ -9,22 +9,26 @@ export default function Profile() {
   const [editData, setEditData] = useState({ ...dna })
   const [githubHeatmap, setGithubHeatmap] = useState(null)
 
- 
-  const [history] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('studentos_focus_history') || '{}') } catch { return {} }
-  })
+  const activityLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
 
-  
-  const heatmapData = []
-  const today = new Date()
+  const activityCounts = activityLog.reduce((acc, date) => {
+    acc[date] = (acc[date] || 0) + 1
+    return acc
+  }, {})
+
+  const days = []
   for (let i = 83; i >= 0; i--) {
-    const d = new Date(today)
+    const d = new Date()
     d.setDate(d.getDate() - i)
-    const dateStr = d.toLocaleDateString()
-    heatmapData.push({
-      date: d,
-      count: history[dateStr] || 0
-    })
+    days.push(d.toISOString().split('T')[0])
+  }
+
+  const getColor = (dateString) => {
+    const count = activityCounts[dateString] || 0
+    if (count === 0) return 'rgba(255,255,255,0.04)'
+    if (count === 1) return 'rgba(232,213,183,0.30)'
+    if (count === 2) return 'rgba(232,213,183,0.60)'
+    return 'rgba(232,213,183,0.95)'
   }
 
   useEffect(() => {
@@ -230,26 +234,20 @@ export default function Profile() {
                       />
                     ))
                   ) : (
-                    heatmapData.slice(rowIndex * 12, (rowIndex + 1) * 12).map((day, colIndex) => {
-                      let bg = 'var(--surface-elevated)'
-                      if (day.count > 0) bg = 'rgba(255,255,255,0.3)'
-                      if (day.count > 2) bg = 'rgba(255,255,255,0.6)'
-                      if (day.count > 4) bg = 'var(--primary)'
-                      
-                      return (
-                        <div 
-                          key={colIndex} 
-                          title={`${day.count} sessions on ${day.date.toLocaleDateString()}`}
-                          style={{ 
-                            width: '100%', 
-                            paddingBottom: '100%',
-                            background: bg, 
-                            borderRadius: 0,
-                            border: '1px solid var(--surface-card)'
-                          }} 
-                        />
-                      )
-                    })
+                    days.slice(rowIndex * 12, (rowIndex + 1) * 12).map((dateString, colIndex) => (
+                      <div 
+                        key={dateString} 
+                        className="heatmap-square"
+                        title={`${dateString} · ${activityCounts[dateString] || 0} actions`}
+                        style={{ 
+                          width: '100%', 
+                          paddingBottom: '100%',
+                          backgroundColor: getColor(dateString), 
+                          borderRadius: 0,
+                          border: '1px solid var(--surface-card)'
+                        }} 
+                      />
+                    ))
                   )}
                 </div>
               ))}

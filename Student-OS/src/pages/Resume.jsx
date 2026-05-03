@@ -35,6 +35,11 @@ export default function Resume() {
     setResults({ found, missing, score })
     setAnalyzed(true)
     addXP(10, 'Resume Analyzed')
+
+    const today = new Date().toISOString().split('T')[0]
+    const existingLog = JSON.parse(localStorage.getItem('activityLog') || '[]')
+    existingLog.push(today)
+    localStorage.setItem('activityLog', JSON.stringify(existingLog))
   }
 
   function getScoreColor(score) {
