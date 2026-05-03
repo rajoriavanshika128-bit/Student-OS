@@ -85,7 +85,30 @@
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 .onboarding-input-wrap { margin-bottom: 40px; }
-.onboarding-input { font-size: 24px; padding: 16px 0; border-bottom: 1px solid var(--primary); }
+
+.onboarding-select {
+  font-size: 24px;
+  padding: 16px 40px 16px 0;
+  background: transparent;
+  color: var(--on-dark);
+  font-family: var(--font-heading);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L8 8L15 1' stroke='%23ffffff' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+.onboarding-select:focus {
+  outline: none;
+}
+.onboarding-select option {
+  background: #111;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 16px;
+}
 
 .onboarding-skills-grid {
   display: flex;

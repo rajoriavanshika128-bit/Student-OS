@@ -14,6 +14,17 @@ const ROLES = [
   { id: 'DevOps Engineer',      desc: 'Automate & scale systems' },
 ]
 
+const DEGREES = [
+  'Computer Science',
+  'Software Engineering',
+  'Information Technology',
+  'Design / HCI',
+  'Business / Management',
+  'Data Science',
+  'Engineering',
+  'Other'
+]
+
 function useTypewriter(text, speed = 38) {
   const [displayed, setDisplayed] = useState('')
   const [done, setDone] = useState(false)
@@ -119,14 +130,17 @@ export default function Onboarding() {
 
           {step === 0 && (
             <div className="onboarding-input-wrap">
-              <input
-                className="input-field onboarding-input"
-                placeholder="e.g. Computer Science, Design, Business..."
+              <select
+                className="input-field onboarding-select"
                 value={degree}
                 onChange={e => setDegree(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && canAdvance() && handleNext()}
                 autoFocus
-              />
+              >
+                <option value="" disabled>Select your field of study...</option>
+                {DEGREES.map(d => (
+                  <option key={d} value={d}>{d}</option>
+                ))}
+              </select>
             </div>
           )}
 
