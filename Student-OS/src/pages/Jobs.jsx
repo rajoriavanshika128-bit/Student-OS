@@ -385,11 +385,12 @@ export default function Jobs() {
         </div>
       )}
 
-      <div>
-        {displayedJobs.map(job => (
+      <div key={`${filter}-${sortBy}-${salaryRange}`}>
+        {displayedJobs.map((job, i) => (
           <div
             key={job.id}
-            className="job-card"
+            className="job-card stagger-item"
+            style={{ animationDelay: `${i * 60}ms` }}
             onClick={() => setSelectedJob(job)}
           >
             <div className="job-info">

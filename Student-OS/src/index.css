@@ -405,6 +405,32 @@ button:active, .btn-primary:active, .btn-secondary:active, .btn-ghost:active {
   padding: 0 80px 120px;
 }
 
+@keyframes staggerFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stagger-item {
+  animation: staggerFadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDownBanner {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes sidebarSlideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.sidebar-item-enter {
+  animation: sidebarSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (max-width: 1200px) {
   .page-enter { padding: 0 40px 80px; }
 }

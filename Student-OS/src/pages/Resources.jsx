@@ -74,7 +74,7 @@ export default function Resources() {
         {filteredResources.map((r, i) => {
           const isMissing = missing.includes(r.skill)
           return (
-            <div key={i} className="card" style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid var(--hairline-strong)', borderRadius: 0, padding: 32 }}>
+            <div key={i} className="card stagger-item" style={{ animationDelay: `${i * 50}ms`, display: 'flex', flexDirection: 'column', borderLeft: '1px solid var(--hairline-strong)', borderRadius: 0, padding: 32 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
                 <span className={`badge`} style={{ 
                   background: 'transparent',

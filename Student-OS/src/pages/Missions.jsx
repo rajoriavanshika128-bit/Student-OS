@@ -89,12 +89,14 @@ export default function Missions() {
         <div className="section-sub">Complete 3 daily tasks</div>
       </div>
 
-      {isAllDone && (
-        <div className="mission-banner card" style={{ background: 'var(--primary)', color: '#000', marginBottom: 40, padding: '24px 32px', display: 'flex', alignItems: 'center', gap: 24, borderRadius: 0, border: 'none' }}>
+      {completed.length === 3 && (
+        <div style={{ 
+          background: 'var(--primary)', color: '#000', marginBottom: 40, padding: '24px 32px', display: 'flex', alignItems: 'center', gap: 24, borderRadius: 0, border: 'none',
+          animation: 'slideDownBanner 0.5s ease-out forwards' 
+        }}>
           <span style={{ fontSize: 32 }}>🔥</span>
-          <div>
-            <div style={{ fontFamily: 'var(--font-heading)', fontSize: 24, letterSpacing: '2px', textTransform: 'uppercase' }}>All missions complete</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '2px', opacity: 0.8, marginTop: 4, textTransform: 'uppercase' }}>Day Streak +1. See you tomorrow.</div>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: 24, letterSpacing: '2px', textTransform: 'uppercase' }}>
+            All missions complete — Day Streak +1!
           </div>
         </div>
       )}
@@ -103,11 +105,10 @@ export default function Missions() {
         {missions.map((m, i) => {
           const isDone = completed.includes(m.id)
           return (
-            <div key={m.id} className="card page-enter" style={{ 
+            <div key={m.id} className="card stagger-item" style={{ 
               display: 'flex', gap: 24, alignItems: 'center', cursor: isDone ? 'default' : 'pointer',
               opacity: isDone ? 0.5 : 1, transition: 'border-color 0.3s, opacity 0.3s',
               animationDelay: `${i * 100}ms`,
-              transform: 'translateY(10px)',
               border: '1px solid',
               borderColor: isDone ? 'var(--hairline)' : 'var(--hairline-strong)',
               padding: '32px',

@@ -157,9 +157,15 @@ export default function SkillGap() {
               : missing.map((s, idx) => {
                 const isDetected = detectedSkills.includes(s)
                 return (
-                  <div key={s} className="card page-enter" style={{ 
+                  <div key={s} className="card" style={{ 
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
-                    animationDelay: `${idx * 100}ms`,
+                    opacity: 0,
+                    transform: 'translateY(20px)',
+                    animationName: 'fadeSlideUp',
+                    animationDuration: '0.5s',
+                    animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    animationFillMode: 'both',
+                    animationDelay: `${300 + idx * 80}ms`,
                     borderLeft: isDetected ? '4px solid var(--warning)' : '1px solid var(--hairline-strong)',
                     padding: 'var(--s-5) var(--s-6)'
                   }}>

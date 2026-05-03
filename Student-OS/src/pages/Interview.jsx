@@ -82,25 +82,27 @@ export default function Interview() {
           }}
         >
          
-          <div className="card" style={{ 
+          <div style={{ 
             position: 'absolute', inset: 0, 
             backfaceVisibility: 'hidden', 
+            WebkitBackfaceVisibility: 'hidden',
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
             textAlign: 'center', padding: 60,
-            borderRadius: 0, border: '1px solid var(--hairline-strong)', background: 'transparent'
+            border: '1px solid var(--hairline-strong)', background: 'var(--surface-card)'
           }}>
             <div className="section-label" style={{ marginBottom: 40, color: 'var(--text-muted)' }}>CLICK TO REVEAL ANSWER</div>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 32, fontWeight: 400, lineHeight: 1.4, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--on-dark)' }}>{q.q}</h2>
           </div>
           
   
-          <div className="card" style={{ 
+          <div style={{ 
             position: 'absolute', inset: 0, 
             backfaceVisibility: 'hidden', 
+            WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
             textAlign: 'center', padding: 60,
-            borderRadius: 0, border: '1px solid var(--primary)', background: 'var(--canvas)'
+            border: '1px solid var(--primary)', background: 'var(--canvas)'
           }}>
             <div className="section-label" style={{ marginBottom: 40, color: 'var(--primary)' }}>ANSWER</div>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 20, color: 'var(--on-dark)', lineHeight: 1.6 }}>{q.a}</p>

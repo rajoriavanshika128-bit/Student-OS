@@ -29,11 +29,11 @@ export default function Sidebar({ isOpen, toggle }) {
         <div className="sidebar-scrollable">
           <div className="nav-group">
             <div className="nav-group-label">IDENTITY</div>
-            <NavLink to="/profile" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/profile" className="nav-link sidebar-item-enter" style={{ animationDelay: '50ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Profile</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/github" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/github" className="nav-link sidebar-item-enter" style={{ animationDelay: '100ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">GitHub Sync</span>
               <span className="nav-link-indicator" />
             </NavLink>
@@ -41,15 +41,15 @@ export default function Sidebar({ isOpen, toggle }) {
 
           <div className="nav-group">
             <div className="nav-group-label">ENGINE</div>
-            <NavLink to="/" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/" className="nav-link sidebar-item-enter" style={{ animationDelay: '150ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Dashboard</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/skill-gap" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/skill-gap" className="nav-link sidebar-item-enter" style={{ animationDelay: '200ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Skill Gap</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/roadmap" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/roadmap" className="nav-link sidebar-item-enter" style={{ animationDelay: '250ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Roadmap</span>
               <span className="nav-link-indicator" />
             </NavLink>
@@ -57,15 +57,15 @@ export default function Sidebar({ isOpen, toggle }) {
 
           <div className="nav-group">
             <div className="nav-group-label">CAREER</div>
-            <NavLink to="/jobs" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/jobs" className="nav-link sidebar-item-enter" style={{ animationDelay: '300ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Market</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/interview" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/interview" className="nav-link sidebar-item-enter" style={{ animationDelay: '350ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Interview</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/resume" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/resume" className="nav-link sidebar-item-enter" style={{ animationDelay: '400ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Optimizer</span>
               <span className="nav-link-indicator" />
             </NavLink>
@@ -73,19 +73,19 @@ export default function Sidebar({ isOpen, toggle }) {
 
           <div className="nav-group">
             <div className="nav-group-label">UTILITIES</div>
-            <NavLink to="/missions" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/missions" className="nav-link sidebar-item-enter" style={{ animationDelay: '450ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Missions</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/projects" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/projects" className="nav-link sidebar-item-enter" style={{ animationDelay: '500ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Projects</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/focus" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/focus" className="nav-link sidebar-item-enter" style={{ animationDelay: '550ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Focus Timer</span>
               <span className="nav-link-indicator" />
             </NavLink>
-            <NavLink to="/resources" className="nav-link" onClick={() => window.innerWidth < 1024 && toggle()}>
+            <NavLink to="/resources" className="nav-link sidebar-item-enter" style={{ animationDelay: '600ms' }} onClick={() => window.innerWidth < 1024 && toggle()}>
               <span className="nav-link-text">Resources</span>
               <span className="nav-link-indicator" />
             </NavLink>

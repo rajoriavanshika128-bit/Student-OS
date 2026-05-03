@@ -43,9 +43,9 @@ export default function Resume() {
   }
 
   function getScoreColor(score) {
-    if (score >= 80) return 'var(--success)'
-    if (score >= 50) return 'var(--amber)'
-    return 'var(--danger)'
+    if (score > 70) return '#4ADE80'
+    if (score >= 40) return '#C9A96E'
+    return '#F87171'
   }
 
   return (

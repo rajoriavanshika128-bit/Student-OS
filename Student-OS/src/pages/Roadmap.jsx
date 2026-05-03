@@ -66,7 +66,7 @@ export default function Roadmap() {
           const milestoneChecked = m.tasks.filter((_, ti) => checked[`${mi}-${ti}`]).length
           const isCurrent = m.current
           return (
-            <div key={mi} className="page-enter" style={{ marginBottom: 40, position: 'relative', animationDelay: `${mi * 150}ms`, transform: 'translateX(20px)' }}>
+            <div key={mi} className="stagger-item" style={{ marginBottom: 40, position: 'relative', animationDelay: `${mi * 200}ms` }}>
             
               <div style={{
                 position: 'absolute', left: -20, top: 24,
