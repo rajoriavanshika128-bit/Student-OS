@@ -3,8 +3,41 @@ import { useDNA } from '../context/DNAContext'
 import { ROLE_SKILLS } from '../data/roleSkills'
 import AnimatedCounter from '../components/AnimatedCounter'
 import HeroVideo from '../components/HeroVideo'
+const skillDescriptions = {
+  'HTML': 'Fundamental markup language for structuring web interfaces.',
+  'CSS': 'Styling language for visually enhancing web interfaces.',
+  'JavaScript': 'Core scripting language for dynamic functionality.',
+  'React': 'Component-based UI library for modern frontends.',
+  'Git': 'Version control system for source code management.',
+  'Figma': 'Collaborative interface design and prototyping tool.',
+  'TypeScript': 'Strongly typed programming language over JavaScript.',
+  'APIs': 'Application Programming Interfaces for backend integration.',
+  'Python': 'High-level language for backend and data tasks.',
+  'Node.js': 'JavaScript runtime for building scalable servers.',
+  'SQL': 'Domain-specific language for managing databases.',
+  'Java': 'Object-oriented language for enterprise applications.',
+  'Docker': 'Platform for containerized applications.',
+  'Prototyping': 'Process of creating preliminary interface versions.',
+  'Typography': 'Art and technique of arranging type for legibility.',
+  'Color Theory': 'Principles for combining colors effectively.',
+  'Excel': 'Spreadsheet software for data organization.',
+  'Statistics': 'Mathematical body of science for data analysis.',
+  'Visualization': 'Graphical representation of information and data.',
+  'R': 'Programming language for statistical computing.',
+  'Roadmapping': 'Strategic planning process for product development.',
+  'Analytics': 'Systematic computational analysis of data.',
+  'Communication': 'Conveying information effectively across teams.',
+  'Agile': 'Iterative approach to software delivery.',
+  'Research': 'Systematic investigation to reach new conclusions.',
+  'Linux': 'Open-source operating system widely used in servers.',
+  'CI/CD': 'Continuous Integration and Deployment practices.',
+  'AWS': 'Amazon Web Services cloud computing platform.',
+  'Kubernetes': 'Container orchestration system for automating deployment.',
+  'Networking': 'Practice of linking computing devices together.'
+}
 
 export default function SkillGap() {
+  const [showSpecsModal, setShowSpecsModal] = useState(false)
   const { dna, markSkillLearned } = useDNA()
   const required = ROLE_SKILLS[dna.dreamRole] || []
   const userSkills = dna.skills || []
@@ -108,7 +141,7 @@ export default function SkillGap() {
             </div>
           </div>
           
-          <button className="btn-secondary" style={{ marginTop: 'var(--s-6)', width: '100%' }} onClick={() => window.scrollTo({ top: 1000, behavior: 'smooth' })}>
+          <button className="btn-secondary" style={{ marginTop: 'var(--s-6)', width: '100%' }} onClick={() => setShowSpecsModal(true)}>
             VIEW SPECIFICATIONS
           </button>
         </div>
@@ -196,6 +229,91 @@ export default function SkillGap() {
           </div>
         </div>
       </div>
+
+      {showSpecsModal && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.8)',
+          backdropFilter: 'blur(8px)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '24px'
+        }}>
+          <div className="card-elevated" style={{
+            width: '100%',
+            maxWidth: 600,
+            maxHeight: '80vh',
+            overflowY: 'auto',
+            padding: 'var(--s-6)',
+            position: 'relative'
+          }}>
+            <button 
+              onClick={() => setShowSpecsModal(false)}
+              style={{
+                position: 'absolute',
+                top: 24,
+                right: 24,
+                background: 'transparent',
+                border: '1px solid var(--hairline-strong)',
+                color: 'var(--text-muted)',
+                width: 32,
+                height: 32,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: 'var(--font-mono)',
+                cursor: 'pointer',
+                transition: 'all 0.2s var(--ease)'
+              }}
+              onMouseOver={e => { e.currentTarget.style.color = 'var(--on-dark)'; e.currentTarget.style.borderColor = 'var(--primary)'; }}
+              onMouseOut={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--hairline-strong)'; }}
+            >
+              X
+            </button>
+            <div className="section-label">SPECIFICATIONS</div>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 32, color: 'var(--on-dark)', marginBottom: 32, textTransform: 'uppercase' }}>
+              {dna.dreamRole}
+            </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {required.map(s => {
+                const isAcquired = userSkills.includes(s)
+                return (
+                  <div key={s} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    paddingBottom: 16,
+                    borderBottom: '1px solid var(--hairline)'
+                  }}>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-heading)', fontSize: 20, color: 'var(--on-dark)', marginBottom: 4 }}>
+                        {s.toUpperCase()}
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--text-muted)' }}>
+                        {skillDescriptions[s] || `Core competency for ${dna.dreamRole}.`}
+                      </div>
+                    </div>
+                    <div style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 10,
+                      letterSpacing: '2px',
+                      padding: '4px 8px',
+                      border: `1px solid ${isAcquired ? 'var(--success)' : 'var(--warning)'}`,
+                      color: isAcquired ? 'var(--success)' : 'var(--warning)',
+                      marginTop: 4
+                    }}>
+                      {isAcquired ? 'ACQUIRED' : 'PENDING'}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
