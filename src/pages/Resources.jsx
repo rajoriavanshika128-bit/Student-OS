@@ -35,14 +35,61 @@ export default function Resources() {
         <div className="section-sub">Curated materials for your skill gaps</div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40, flexWrap: 'wrap', gap: 24, borderBottom: '1px solid var(--hairline-strong)', paddingBottom: 16 }}>
-        <div className="filter-tabs" style={{ gap: 16 }}>
+      <style>{`
+        .pill-tabs {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #111;
+          padding: 6px;
+          border-radius: 9999px;
+          border: 1px solid var(--hairline-strong);
+          flex: 1;
+          max-width: 900px;
+        }
+        .pill-btn {
+          flex: 1;
+          text-align: center;
+          padding: 10px 0;
+          border-radius: 9999px;
+          font-family: var(--font-mono);
+          font-size: 11px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-weight: 500;
+          color: var(--text-muted);
+          border: none;
+          background: transparent;
+          transition: all 0.3s var(--ease);
+          cursor: pointer;
+        }
+        .pill-btn:hover {
+          color: var(--on-dark);
+        }
+        .pill-active {
+          color: #fff !important;
+          background: #2563EB !important;
+        }
+        @media (max-width: 768px) {
+          .pill-tabs {
+            overflow-x: auto;
+            white-space: nowrap;
+            justify-content: flex-start;
+          }
+          .pill-btn {
+            flex: 0 0 auto;
+            padding: 10px 24px;
+          }
+        }
+      `}</style>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40, flexWrap: 'wrap', gap: 64, borderBottom: '1px solid var(--hairline-strong)', paddingBottom: 16 }}>
+        <div className="pill-tabs">
           {['All', 'Videos', 'Articles', 'Courses'].map(t => (
             <button
               key={t}
-              className={`filter-tab ${filterType === t ? 'active' : ''}`}
+              className={filterType === t ? 'pill-btn pill-active' : 'pill-btn'}
               onClick={() => setFilterType(t)}
-              style={{ borderRadius: 0, border: filterType === t ? '1px solid var(--primary)' : '1px solid transparent', background: 'transparent', color: filterType === t ? 'var(--primary)' : 'var(--text-muted)' }}
             >
               {t.toUpperCase()}
             </button>
