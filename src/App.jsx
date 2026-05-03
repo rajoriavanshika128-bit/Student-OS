@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { DNAProvider, useDNA } from './context/DNAContext'
 import Sidebar from './components/Sidebar'
 import Onboarding from './components/Onboarding'
@@ -23,6 +23,14 @@ import VideoBackground from './components/VideoBackground'
 function AppInner() {
   const { dna } = useDNA()
   const [menuOpen, setMenuOpen] = React.useState(window.innerWidth > 768)
+  const location = useLocation()
+  const mainRef = useRef(null)
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTo(0, 0)
+    }
+  }, [location.pathname])
 
   if (!dna) return (
     <>
@@ -34,7 +42,7 @@ function AppInner() {
     <div className={`app-shell ${menuOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
       <VideoBackground />
       <Sidebar isOpen={menuOpen} toggle={() => setMenuOpen(!menuOpen)} />
-      <main className="main-content">
+      <main className="main-content" ref={mainRef}>
         <Routes>
           <Route path="/"          element={<Dashboard />} />
           <Route path="/skill-gap" element={<SkillGap />} />
