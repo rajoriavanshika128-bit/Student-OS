@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDNA } from '../context/DNAContext'
 import HeroVideo from '../components/HeroVideo'
 
@@ -132,6 +132,13 @@ export default function Jobs() {
   const [sortBy, setSortBy] = useState('Relevance')
   const [salaryRange, setSalaryRange] = useState('Any')
   const [selectedJob, setSelectedJob] = useState(null)
+  const detailCardRef = useRef(null)
+
+  useEffect(() => {
+    if (selectedJob && detailCardRef.current) {
+      detailCardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [selectedJob])
 
   const displayedJobs = jobs
     .filter(job => {
@@ -239,42 +246,35 @@ export default function Jobs() {
           border-color: var(--primary);
           transform: translateY(-2px);
         }
-        .modal-backdrop {
-          position: fixed;
-          top: 0; left: 0; width: 100vw; height: 100vh;
-          background: rgba(0, 0, 0, 0.8);
-          backdrop-filter: blur(5px);
-          z-index: 10000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .modal-box {
-          background: #111;
-          border: 1px solid #333;
-          border-radius: 16px;
-          width: 90%;
-          max-width: 800px;
-          max-height: 90vh;
-          overflow-y: auto;
+        .detail-card {
+          background: var(--surface-card);
+          border: 1px solid var(--hairline-strong);
+          border-left: 2px solid var(--primary);
+          border-radius: 0;
+          width: 100%;
           padding: 40px;
           position: relative;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+          margin-bottom: 40px;
+          animation: fadeSlideDown 0.3s var(--ease);
+        }
+        @keyframes fadeSlideDown {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: none; }
         }
         .modal-close-btn {
           position: absolute;
           top: 24px; right: 24px;
-          background: #222;
-          border: 1px solid #333;
-          border-radius: 50%;
-          width: 36px; height: 36px;
+          background: transparent;
+          border: 1px solid var(--hairline-strong);
+          border-radius: 0;
+          padding: 8px 16px;
           display: flex; align-items: center; justify-content: center;
-          color: var(--text-muted); font-size: 16px; cursor: pointer;
+          color: var(--text-muted); font-size: 11px; font-family: var(--font-mono); letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
           transition: all 0.2s ease;
         }
         .modal-close-btn:hover {
-          background: #333;
-          color: #fff;
+          border-color: var(--primary);
+          color: var(--on-dark);
         }
         .modal-top { margin-bottom: 32px; }
         .modal-type-badge {
@@ -406,10 +406,7 @@ export default function Jobs() {
             flex: 0 0 auto;
             padding: 10px 24px;
           }
-          .modal-box {
-            width: 95vw !important;
-            max-width: 95vw !important;
-            max-height: 90vh !important;
+          .detail-card {
             padding: 24px 16px;
           }
           .modal-meta-row {
@@ -489,16 +486,69 @@ export default function Jobs() {
         </div>
       )}
 
+      {selectedJob !== null && (
+        <div ref={detailCardRef} className="detail-card">
+          <button
+            className="modal-close-btn"
+            onClick={() => setSelectedJob(null)}
+          >
+            CLOSE
+          </button>
+
+          <div className="modal-top">
+            <span className="modal-type-badge">{selectedJob.type}</span>
+            <h2 className="modal-job-title">{selectedJob.title}</h2>
+            <p className="modal-job-company">{selectedJob.company}</p>
+          </div>
+
+          <div className="modal-meta-row">
+            <div className="modal-meta-item">
+              <span className="modal-meta-label">Location</span>
+              <span className="modal-meta-value">{selectedJob.location}</span>
+            </div>
+            <div className="modal-meta-item">
+              <span className="modal-meta-label">Salary</span>
+              <span className="modal-meta-value">{selectedJob.salary}</span>
+            </div>
+            <div className="modal-meta-item">
+              <span className="modal-meta-label">Posted</span>
+              <span className="modal-meta-value">{selectedJob.postedDate}</span>
+            </div>
+          </div>
+
+          <div className="modal-section">
+            <p className="modal-section-label">About this role</p>
+            <p className="modal-desc">{selectedJob.description}</p>
+          </div>
+
+          <div className="modal-section">
+            <p className="modal-section-label">Your matching skills</p>
+            <div className="modal-skill-row">
+              {(dna.skills || []).map(skill => (
+                <span key={skill} className="modal-skill-chip">{skill}</span>
+              ))}
+            </div>
+          </div>
+
+          <a
+            href={selectedJob.url !== '#' ? selectedJob.url : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={selectedJob.url !== '#' ? 'modal-apply-btn' : 'modal-apply-btn modal-apply-disabled'}
+            onClick={selectedJob.url === '#' ? e => e.preventDefault() : undefined}
+          >
+            {selectedJob.url !== '#' ? 'Apply for this Role' : 'Sample Role — No Link'}
+          </a>
+        </div>
+      )}
+
       <div key={`${filter}-${sortBy}-${salaryRange}`}>
         {displayedJobs.map((job, i) => (
           <div
             key={job.id}
             className="job-card stagger-item"
             style={{ animationDelay: `${i * 60}ms` }}
-            onClick={() => {
-              setSelectedJob(job);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={() => setSelectedJob(job)}
           >
             <div className="job-info">
               <h3 className="job-title">{job.title}</h3>
@@ -515,7 +565,6 @@ export default function Jobs() {
               onClick={e => {
                 e.stopPropagation();
                 setSelectedJob(job);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
               View Role
@@ -523,70 +572,6 @@ export default function Jobs() {
           </div>
         ))}
       </div>
-
-      {selectedJob !== null && (
-        <div
-          className="modal-backdrop"
-          onClick={() => setSelectedJob(null)}
-        >
-          <div
-            className="modal-box"
-            onClick={e => e.stopPropagation()}
-          >
-            <button
-              className="modal-close-btn"
-              onClick={() => setSelectedJob(null)}
-            >
-              CLOSE
-            </button>
-
-            <div className="modal-top">
-              <span className="modal-type-badge">{selectedJob.type}</span>
-              <h2 className="modal-job-title">{selectedJob.title}</h2>
-              <p className="modal-job-company">{selectedJob.company}</p>
-            </div>
-
-            <div className="modal-meta-row">
-              <div className="modal-meta-item">
-                <span className="modal-meta-label">Location</span>
-                <span className="modal-meta-value">{selectedJob.location}</span>
-              </div>
-              <div className="modal-meta-item">
-                <span className="modal-meta-label">Salary</span>
-                <span className="modal-meta-value">{selectedJob.salary}</span>
-              </div>
-              <div className="modal-meta-item">
-                <span className="modal-meta-label">Posted</span>
-                <span className="modal-meta-value">{selectedJob.postedDate}</span>
-              </div>
-            </div>
-
-            <div className="modal-section">
-              <p className="modal-section-label">About this role</p>
-              <p className="modal-desc">{selectedJob.description}</p>
-            </div>
-
-            <div className="modal-section">
-              <p className="modal-section-label">Your matching skills</p>
-              <div className="modal-skill-row">
-                {(dna.skills || []).map(skill => (
-                  <span key={skill} className="modal-skill-chip">{skill}</span>
-                ))}
-              </div>
-            </div>
-
-            <a
-              href={selectedJob.url !== '#' ? selectedJob.url : undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={selectedJob.url !== '#' ? 'modal-apply-btn' : 'modal-apply-btn modal-apply-disabled'}
-              onClick={selectedJob.url === '#' ? e => e.preventDefault() : undefined}
-            >
-              {selectedJob.url !== '#' ? 'Apply for this Role' : 'Sample Role — No Link'}
-            </a>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
