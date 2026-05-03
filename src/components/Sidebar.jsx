@@ -27,7 +27,7 @@ export default function Sidebar({ isOpen, toggle }) {
         </button>
         <div className="sidebar-header">
           <NavLink to="/" className="wordmark-display" onClick={() => toggle()}>
-            STUDENTOS <span style={{ opacity: 0.4 }}>X</span>
+            StudentOS
           </NavLink>
         </div>
 
