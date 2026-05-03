@@ -22,7 +22,7 @@ import VideoBackground from './components/VideoBackground'
 
 function AppInner() {
   const { dna } = useDNA()
-  const [menuOpen, setMenuOpen] = React.useState(true) // Default open for desktop
+  const [menuOpen, setMenuOpen] = React.useState(window.innerWidth > 768)
 
   if (!dna) return (
     <>

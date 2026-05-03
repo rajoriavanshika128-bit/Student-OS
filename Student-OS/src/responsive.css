@@ -1,0 +1,120 @@
+/* =========================================
+   RESPONSIVE DESIGN SYSTEM
+   ========================================= */
+
+@media (max-width: 1024px) {
+  /* Tablet fixes */
+  .bugatti-sidebar { width: 180px !important; min-width: 180px !important; }
+  .nav-link-text { font-size: 12px !important; }
+  .nav-group-label { font-size: 11px !important; }
+  
+  /* Dashboard & Github Grid */
+  .grid-4 { grid-template-columns: 1fr 1fr !important; }
+  
+  /* Career Roadmap */
+  .timeline-content { width: calc(50% - 20px) !important; padding: 24px !important; }
+}
+
+@media (max-width: 768px) {
+  /* Global spacing fixes */
+  .page-enter { padding: 0 16px 120px !important; }
+  .main-content { overflow-x: hidden !important; }
+  .card, .card-elevated, .stat-card { padding: 14px !important; }
+  :root { --spacing-section: 12px; }
+  
+  /* Typography scaling */
+  h1, .section-title { font-size: 1.8rem !important; }
+  h2 { font-size: 1.4rem !important; }
+  body, p { font-size: 13px !important; }
+  .section-label, .nav-group-label { font-size: 11px !important; }
+  .stat-card-value { font-size: 28px !important; }
+
+  /* Generic Grid Stacking */
+  .grid-4, .grid-2 { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* Dashboard */
+  .page-enter > .card-elevated > div[style*="alignItems: center"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .page-enter > .card-elevated > div[style*="alignItems: center"] > div:last-child {
+    width: 100%;
+    margin-top: 16px;
+    text-align: center !important;
+  }
+  .page-enter > .card-elevated > div[style*="alignItems: center"] > div:nth-child(2) > div[style*="flexWrap: wrap"] {
+    justify-content: center !important;
+  }
+
+  /* Skill Gap */
+  .page-enter > .grid-2 { align-items: stretch !important; }
+  span[style*="fontSize: 100"], span[style*="font-size: 100px"] { font-size: 48px !important; }
+
+  /* Career Roadmap */
+  .timeline::before { left: 0 !important; }
+  .timeline-item { width: 100% !important; justify-content: flex-end !important; }
+  .timeline-content { width: calc(100% - 24px) !important; margin-left: 24px !important; text-align: left !important; }
+
+  /* Daily Missions */
+  div[style*="flex: 1"] > div[style*="borderBottom"] {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  }
+  div[style*="flex: 1"] > div[style*="borderBottom"] > div[style*="justifyContent: space-between"] {
+    width: 100%; margin-top: 4px !important;
+  }
+
+  /* Job Market */
+  .job-card { flex-direction: column !important; }
+  div[style*="marginBottom: 24"][style*="justifyContent: space-between"] {
+    flex-direction: column !important; align-items: flex-start !important; gap: 16px;
+  }
+  div[style*="marginBottom: 24"][style*="justifyContent: space-between"] > div:last-child {
+    width: 100% !important;
+  }
+  div[style*="marginBottom: 24"][style*="justifyContent: space-between"] button {
+    width: 100% !important; justify-content: center !important;
+  }
+  
+  /* Job Filters */
+  div[style*="gap: 16"][style*="display: flex"] { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap !important; padding-bottom: 8px; }
+  div[style*="gap: 16"][style*="display: flex"]::-webkit-scrollbar { display: none; }
+  div[style*="gap: 16"][style*="alignItems: center"] { flex-direction: column; align-items: stretch !important; }
+
+  /* Job Modal */
+  .card[style*="width: 800"] { width: 95% !important; max-width: 95% !important; height: 90% !important; overflow-y: auto !important; margin: 5% auto !important; }
+
+  /* GitHub Stats */
+  .page-enter > .card-elevated[style*="alignItems: center"] { flex-direction: column !important; text-align: center !important; gap: 16px !important; }
+  .page-enter > .card-elevated[style*="alignItems: center"] > div[style*="flexShrink: 0"] { margin: 0 auto; }
+  .page-enter > .card-elevated[style*="alignItems: center"] > div > div[style*="gap: 24"] { justify-content: center !important; }
+  .github-metric-grid { grid-template-columns: 1fr 1fr !important; } /* In Mobile, metric cards 2x2 */
+
+  /* Interview Prep */
+  div[style*="maxWidth: 800"] { max-width: 90% !important; margin: 0 auto !important; }
+  div[style*="maxWidth: 800"] h2 { font-size: 1.3rem !important; }
+  div[style*="gap: 24"][style*="justifyContent: center"] { flex-direction: column !important; width: 100%; }
+  div[style*="gap: 24"][style*="justifyContent: center"] button { width: 100% !important; }
+
+  /* Resume Analyzer */
+  textarea.input-field { height: 150px !important; min-height: 150px !important; }
+  div[style*="flexWrap: wrap"] { flex-wrap: wrap !important; }
+
+  /* Focus Timer */
+  div[style*="width: 200"][style*="height: 200"] { transform: scale(0.8); margin-bottom: 0 !important; }
+  div[style*="fontSize: 48"][class*="heartbeat"] { font-size: 64px !important; }
+  div[style*="fontSize: 48"]:not([class*="heartbeat"]) { font-size: 64px !important; }
+  div[style*="gap: 24"][style*="display: flex"] { flex-direction: column !important; width: 100% !important; }
+  div[style*="gap: 24"][style*="display: flex"] button { width: 100% !important; }
+  div[style*="height: 180"] { height: 120px !important; }
+
+  /* My Profile */
+  div[style*="flexWrap: wrap"] { flex-wrap: wrap !important; }
+  div[style*="width: 14"][style*="height: 14"] { width: 10px !important; height: 10px !important; margin: 1px !important; }
+}
+
+@media (max-width: 480px) {
+  .page-enter { padding: 0 12px 120px !important; }
+  h1, .section-title { font-size: 1.6rem !important; }
+  h2 { font-size: 1.3rem !important; }
+}

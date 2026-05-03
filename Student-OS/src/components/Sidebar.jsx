@@ -12,14 +12,19 @@ export default function Sidebar({ isOpen, toggle }) {
     <>
       
       <button 
-        className={`nav-toggle-btn ${isOpen ? 'active' : ''}`}
+        className="mobile-hamburger-btn"
         onClick={toggle}
       >
-        <div className="nav-toggle-line" />
-        <div className="nav-toggle-line" />
+        <div className="hamburger-line" />
+        <div className="hamburger-line" />
+        <div className="hamburger-line" />
       </button>
 
       <aside className={`bugatti-sidebar ${isOpen ? 'open' : ''}`}>
+        <button className="mobile-close-btn" onClick={toggle}>
+          <div className="hamburger-line" style={{ transform: 'translateY(1px) rotate(45deg)' }} />
+          <div className="hamburger-line" style={{ transform: 'translateY(-0px) rotate(-45deg)' }} />
+        </button>
         <div className="sidebar-header">
           <NavLink to="/" className="wordmark-display" onClick={() => toggle()}>
             STUDENTOS <span style={{ opacity: 0.4 }}>X</span>
