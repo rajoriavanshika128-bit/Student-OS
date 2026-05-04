@@ -442,7 +442,29 @@ export default function Jobs() {
             gap: 16px;
           }
         }
+        
+        .cyan-tag {
+          font-size: 0.75rem;
+          line-height: 1rem;
+          letter-spacing: 0.05em;
+          padding: 0.25rem 0.75rem;
+          border-radius: 9999px;
+          border: 1px solid rgba(6, 182, 212, 0.3);
+          color: rgba(103, 232, 249, 0.8);
+          background-color: rgba(8, 51, 68, 0.4);
+          transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: default;
+          text-transform: uppercase;
+          font-family: var(--font-mono);
+          display: inline-flex;
+          align-items: center;
+        }
+        .cyan-tag:hover {
+          border-color: rgba(34, 211, 238, 1);
+          color: rgba(165, 243, 252, 1);
+        }
       `}</style>
+
 
       <div className="hero-photo-band">
         <HeroVideo />
@@ -570,8 +592,10 @@ export default function Jobs() {
                 </button>
 
                 <div className="modal-top">
-                  <span className="modal-type-badge">{job.type}</span>
+                  <span className="cyan-tag" style={{ marginBottom: 16 }}>{job.type}</span>
                   <h2 className="modal-job-title">{job.title}</h2>
+
+
                   <p className="modal-job-company">{job.company}</p>
                 </div>
 
@@ -599,9 +623,11 @@ export default function Jobs() {
                   <p className="modal-section-label">Your matching skills</p>
                   <div className="modal-skill-row">
                     {(dna.skills || []).map(skill => (
-                      <span key={skill} className="modal-skill-chip">{skill}</span>
+                      <span key={skill} className="cyan-tag">{skill}</span>
                     ))}
                   </div>
+
+
                 </div>
 
                 <a
@@ -650,10 +676,12 @@ export default function Jobs() {
                   <h3 className="job-title">{job.title}</h3>
                   <p className="job-company">{job.company}</p>
                   <div className="job-tags">
-                    <span className="job-tag">{job.location}</span>
-                    <span className="job-tag">{job.salary}</span>
-                    <span className="job-tag">{job.type}</span>
+                    <span className="cyan-tag">{job.location}</span>
+                    <span className="cyan-tag">{job.salary}</span>
+                    <span className="cyan-tag">{job.type}</span>
                   </div>
+
+
                   <p className="job-posted">{job.postedDate}</p>
                 </div>
                 <button

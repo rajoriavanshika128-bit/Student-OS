@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDNA } from '../context/DNAContext'
-import './Sidebar.css' 
+import './Sidebar.css'
 
 export default function Sidebar({ isOpen, toggle }) {
   const { dna } = useDNA()
@@ -10,8 +10,8 @@ export default function Sidebar({ isOpen, toggle }) {
 
   return (
     <>
-      
-      <button 
+
+      <button
         className="mobile-hamburger-btn"
         onClick={toggle}
       >
@@ -106,8 +106,8 @@ export default function Sidebar({ isOpen, toggle }) {
           </div>
         </div>
       </aside>
-      
-      
+
+
       {isOpen && <div className="sidebar-mobile-overlay" onClick={toggle} />}
     </>
   )
