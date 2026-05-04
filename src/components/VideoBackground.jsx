@@ -8,11 +8,11 @@ export default function VideoBackground() {
     const video = videoRef.current;
     if (!video) return;
 
-    
+
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = streamUrl;
-    } 
-    
+    }
+
     else {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';

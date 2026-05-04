@@ -188,8 +188,8 @@ export default function Projects() {
                     {p.skills.map(skill => {
                       const hasSkill = userSkills.includes(skill);
                       return (
-                        <span 
-                          key={skill} 
+                        <span
+                          key={skill}
                           className="modal-skill-chip"
                           style={{
                             borderColor: hasSkill ? 'var(--success)' : 'var(--warning)',
@@ -214,8 +214,8 @@ export default function Projects() {
               <div className="card project-card-clickable" onClick={() => setSelectedProject(p)} style={{ display: 'flex', flexDirection: 'column', padding: 40, borderLeft: '1px solid var(--hairline-strong)', borderRadius: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
                   <h3 style={{ fontSize: 32, fontFamily: 'var(--font-heading)', color: 'var(--on-dark)', letterSpacing: '2px', textTransform: 'uppercase' }}>{p.title}</h3>
-                  <span className="badge" style={{ 
-                    border: `1px solid ${getDiffColor(p.difficulty)}`, 
+                  <span className="badge" style={{
+                    border: `1px solid ${getDiffColor(p.difficulty)}`,
                     color: getDiffColor(p.difficulty),
                     background: 'transparent',
                     borderRadius: 0,
@@ -226,25 +226,25 @@ export default function Projects() {
                     {p.difficulty}
                   </span>
                 </div>
-                
+
                 <p style={{ fontSize: 16, color: 'var(--text)', marginBottom: 32, lineHeight: 1.6, fontFamily: 'var(--font-body)' }}>
                   {p.desc}
                 </p>
-                
+
                 <div style={{ marginTop: 'auto', borderTop: '1px solid var(--hairline-strong)', paddingTop: 24 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', letterSpacing: '2px' }}>TIME</span>
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '2px' }}>EST. {p.hours} HOURS</span>
                   </div>
-                  
+
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                     {p.skills.map(s => {
                       const hasSkill = userSkills.includes(s)
                       return (
-                        <span key={s} className="chip" style={{ 
-                          borderRadius: 0, 
-                          border: `1px solid ${hasSkill ? 'var(--success)' : 'var(--warning)'}`, 
-                          color: hasSkill ? 'var(--success)' : 'var(--warning)', 
+                        <span key={s} className="chip" style={{
+                          borderRadius: 0,
+                          border: `1px solid ${hasSkill ? 'var(--success)' : 'var(--warning)'}`,
+                          color: hasSkill ? 'var(--success)' : 'var(--warning)',
                           background: 'transparent',
                           fontFamily: 'var(--font-mono)',
                           fontSize: 10,

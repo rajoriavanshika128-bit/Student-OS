@@ -44,19 +44,19 @@ function AppInner() {
       <Sidebar isOpen={menuOpen} toggle={() => setMenuOpen(!menuOpen)} />
       <main className="main-content" ref={mainRef}>
         <Routes>
-          <Route path="/"          element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/skill-gap" element={<SkillGap />} />
-          <Route path="/roadmap"   element={<Roadmap />} />
-          <Route path="/missions"  element={<Missions />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/missions" element={<Missions />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/projects"  element={<Projects />} />
-          <Route path="/github"    element={<GitHubStats />} />
-          <Route path="/jobs"      element={<Jobs />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/github" element={<GitHubStats />} />
+          <Route path="/jobs" element={<Jobs />} />
           <Route path="/interview" element={<Interview />} />
-          <Route path="/resume"    element={<Resume />} />
-          <Route path="/focus"     element={<FocusTimer />} />
-          <Route path="/profile"   element={<Profile />} />
-          <Route path="*"          element={<Navigate to="/" />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/focus" element={<FocusTimer />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
       <CelebrationOverlay />

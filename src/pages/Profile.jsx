@@ -38,7 +38,7 @@ export default function Profile() {
         const res = await fetch(`https://api.github.com/users/${dna.githubUsername}/repos?per_page=100&sort=updated`)
         if (!res.ok) return
         const repos = await res.json()
-        
+
         const dateCounts = {}
         repos.forEach(r => {
           if (r.pushed_at) {
@@ -46,24 +46,24 @@ export default function Profile() {
             dateCounts[date] = (dateCounts[date] || 0) + 1
           }
         })
-        
+
         const squares = []
         for (let i = 83; i >= 0; i--) {
           const d = new Date(today)
           d.setDate(today.getDate() - i)
           const dateStr = d.toISOString().split('T')[0]
           const count = dateCounts[dateStr] || 0
-          
+
           let color = 'rgba(255,255,255,0.04)'
           if (count === 1) color = 'rgba(74,222,128,0.3)'
           if (count === 2) color = 'rgba(74,222,128,0.6)'
           if (count >= 3) color = 'rgba(74,222,128,0.95)'
-          
+
           squares.push({ date: dateStr, count, color })
         }
         setGithubHeatmap(squares)
       } catch (e) {
-       
+
       }
     }
     fetchGithubActivity()
@@ -77,8 +77,8 @@ export default function Profile() {
   function toggleSkill(s) {
     setEditData(prev => ({
       ...prev,
-      skills: prev.skills.includes(s) 
-        ? prev.skills.filter(x => x !== s) 
+      skills: prev.skills.includes(s)
+        ? prev.skills.filter(x => x !== s)
         : [...prev.skills, s]
     }))
   }
@@ -93,19 +93,19 @@ export default function Profile() {
         <div className="card" style={{ maxWidth: 600 }}>
           <div style={{ marginBottom: 20 }}>
             <label style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>Field of Study</label>
-            <input 
-              className="input-field" 
-              value={editData.degree} 
-              onChange={e => setEditData({...editData, degree: e.target.value})} 
+            <input
+              className="input-field"
+              value={editData.degree}
+              onChange={e => setEditData({ ...editData, degree: e.target.value })}
             />
           </div>
-          
+
           <div style={{ marginBottom: 20 }}>
             <label style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>Dream Role</label>
-            <select 
-              className="input-field" 
+            <select
+              className="input-field"
               value={editData.dreamRole}
-              onChange={e => setEditData({...editData, dreamRole: e.target.value})}
+              onChange={e => setEditData({ ...editData, dreamRole: e.target.value })}
               style={{ appearance: 'none', background: 'var(--elevated)' }}
             >
               <option value="Frontend Developer">Frontend Developer</option>
@@ -124,11 +124,11 @@ export default function Profile() {
               {ALL_SKILLS.map(s => {
                 const isSelected = editData.skills.includes(s)
                 return (
-                  <button 
-                    key={s} 
+                  <button
+                    key={s}
                     onClick={() => toggleSkill(s)}
                     className={`chip chip-${isSelected ? 'success' : 'ghost'}`}
-                    style={{ 
+                    style={{
                       background: isSelected ? 'rgba(74,222,128,0.1)' : 'var(--elevated)',
                       borderColor: isSelected ? 'var(--success)' : 'var(--border-default)',
                       color: isSelected ? 'var(--success)' : 'var(--text-muted)'
@@ -157,7 +157,7 @@ export default function Profile() {
         <div className="section-label">DNA IDENTITY</div>
         <h1 className="section-title">User Profile</h1>
         <div className="section-sub">
-          Core biographical data and technical DNA sequence. 
+          Core biographical data and technical DNA sequence.
           Managed via StudentOS X Performance Engine.
         </div>
       </div>
@@ -170,7 +170,7 @@ export default function Profile() {
               {dna.dreamRole}
             </div>
             <div style={{ fontSize: 18, color: 'var(--text-muted)', marginBottom: 'var(--s-8)', fontFamily: 'var(--font-body)', fontStyle: 'italic' }}>{dna.degree}</div>
-            
+
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s-6)', marginBottom: 'var(--s-8)' }}>
               <div>
                 <div className="section-label" style={{ marginBottom: 8 }}>OPERATING LEVEL</div>
@@ -191,12 +191,12 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          
+
           <button className="btn-secondary" onClick={() => setIsEditing(true)}>EDIT PROFILE</button>
-          
+
           <div style={{ marginTop: 40, borderTop: '1px solid var(--hairline)', paddingTop: 24 }}>
-            <button 
-              className="btn-ghost" 
+            <button
+              className="btn-ghost"
               style={{ color: 'var(--warning)', padding: 0, textAlign: 'left' }}
               onClick={() => {
                 if (window.confirm('Are you sure you want to reset your OS? This will delete all progress.')) {
@@ -215,37 +215,37 @@ export default function Profile() {
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: 32, letterSpacing: '2px', color: 'var(--on-dark)', marginBottom: 40, textTransform: 'uppercase' }}>
               {githubHeatmap ? 'GITHUB PUSH ACTIVITY — LAST 12 WEEKS' : 'CONSISTENCY HEATMAP'}
             </div>
-            
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 4 }}>
               {Array.from({ length: 7 }).map((_, rowIndex) => (
                 <div key={rowIndex} style={{ display: 'contents' }}>
                   {githubHeatmap ? (
                     githubHeatmap.slice(rowIndex * 12, (rowIndex + 1) * 12).map((sq, colIndex) => (
-                      <div 
-                        key={colIndex} 
+                      <div
+                        key={colIndex}
                         title={`${sq.count} pushes on ${sq.date}`}
-                        style={{ 
-                          width: '100%', 
-                          paddingBottom: '100%', 
-                          background: sq.color, 
+                        style={{
+                          width: '100%',
+                          paddingBottom: '100%',
+                          background: sq.color,
                           borderRadius: 0,
                           border: '1px solid var(--surface-card)'
-                        }} 
+                        }}
                       />
                     ))
                   ) : (
                     days.slice(rowIndex * 12, (rowIndex + 1) * 12).map((dateString, colIndex) => (
-                      <div 
-                        key={dateString} 
+                      <div
+                        key={dateString}
                         className="heatmap-square"
                         title={`${dateString} · ${activityCounts[dateString] || 0} actions`}
-                        style={{ 
-                          width: '100%', 
+                        style={{
+                          width: '100%',
                           paddingBottom: '100%',
-                          backgroundColor: getColor(dateString), 
+                          backgroundColor: getColor(dateString),
                           borderRadius: 0,
                           border: '1px solid var(--surface-card)'
-                        }} 
+                        }}
                       />
                     ))
                   )}
@@ -253,12 +253,12 @@ export default function Profile() {
               ))}
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 6, marginTop: 16, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '2px', color: 'var(--text-muted)' }}>
-              LESS <div style={{ width: 10, height: 10, background: 'rgba(255,255,255,0.04)' }}/>
-              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.3)' }}/>
-              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.6)' }}/>
-              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.95)' }}/> MORE
+              LESS <div style={{ width: 10, height: 10, background: 'rgba(255,255,255,0.04)' }} />
+              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.3)' }} />
+              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.6)' }} />
+              <div style={{ width: 10, height: 10, background: 'rgba(74,222,128,0.95)' }} /> MORE
             </div>
-            
+
             <div style={{ marginTop: 40, borderTop: '1px solid var(--hairline-strong)', paddingTop: 24 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
                 <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>MEMBER SINCE</span>

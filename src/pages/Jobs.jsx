@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDNA } from '../context/DNAContext'
 import HeroVideo from '../components/HeroVideo'
+import { getFavourites, saveFavourite, removeFavourite, isFavourited } from '../utils/favourites'
 
 const jobs = [
   {
@@ -132,6 +133,10 @@ export default function Jobs() {
   const [sortBy, setSortBy] = useState('Relevance')
   const [salaryRange, setSalaryRange] = useState('Any')
   const [selectedJob, setSelectedJob] = useState(null)
+  
+  const [showFavourites, setShowFavourites] = useState(false);
+  const [favouriteIds, setFavouriteIds] = useState([]);
+  
   const detailCardRef = useRef(null)
 
   useEffect(() => {
@@ -140,7 +145,29 @@ export default function Jobs() {
     }
   }, [selectedJob])
 
-  const displayedJobs = jobs
+  useEffect(() => {
+    const saved = getFavourites();
+    setFavouriteIds(saved.map(j => j.id));
+  }, []);
+
+  const refreshFavourites = () => {
+    const saved = getFavourites();
+    setFavouriteIds(saved.map(j => j.id));
+  };
+
+  const handleToggleFavourite = (e, job) => {
+    e.stopPropagation();
+    if (isFavourited(job.id)) {
+      removeFavourite(job.id);
+    } else {
+      saveFavourite(job);
+    }
+    refreshFavourites();
+  };
+
+  const baseJobs = showFavourites ? getFavourites() : jobs;
+
+  const displayedJobs = baseJobs
     .filter(job => {
       if (filter === 'All') return true
       if (filter === 'Remote') return job.type === 'Remote'
@@ -177,6 +204,7 @@ export default function Jobs() {
     <div className="page-enter">
       <style>{`
         .job-card {
+          position: relative;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -442,6 +470,45 @@ export default function Jobs() {
         <div style={{ color: 'var(--text-muted)', fontSize: 16 }}>Live roles fetched in real-time via the Adzuna API.</div>
       </div>
 
+      <div style={{ display: 'flex', gap: 24, marginBottom: 32, borderBottom: '1px solid var(--hairline-strong)' }}>
+        <button
+          onClick={() => setShowFavourites(false)}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            padding: '12px 0',
+            color: !showFavourites ? '#1a56db' : 'var(--text-muted)',
+            borderBottom: !showFavourites ? '2px solid #1a56db' : '2px solid transparent',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 14,
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+        >
+          All Jobs
+        </button>
+        <button
+          onClick={() => setShowFavourites(true)}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            padding: '12px 0',
+            color: showFavourites ? '#1a56db' : 'var(--text-muted)',
+            borderBottom: showFavourites ? '2px solid #1a56db' : '2px solid transparent',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 14,
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+        >
+          Favourites ({favouriteIds.length})
+        </button>
+      </div>
+
       <div className="controls-row">
         <p className="results-count" style={{ margin: 0 }}>
           {displayedJobs.length} role{displayedJobs.length !== 1 ? 's' : ''} found
@@ -470,7 +537,11 @@ export default function Jobs() {
         </div>
       </div>
 
-      {displayedJobs.length === 0 && (
+      {showFavourites && displayedJobs.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-muted)', fontFamily: 'var(--font-body)', fontSize: 18 }}>
+          No favourites yet. Click the heart on any job to save it.
+        </div>
+      ) : displayedJobs.length === 0 ? (
         <div className="empty-state">
           <p style={{ fontFamily: 'var(--font-body)', fontSize: 18, color: 'var(--text)' }}>No roles match your current filters.</p>
           <button
@@ -484,9 +555,7 @@ export default function Jobs() {
             Clear all filters
           </button>
         </div>
-      )}
-
-
+      ) : null}
 
       <div key={`${filter}-${sortBy}-${salaryRange}`}>
         {displayedJobs.map((job, i) => (
@@ -551,6 +620,32 @@ export default function Jobs() {
                 style={{ animationDelay: `${i * 60}ms` }}
                 onClick={() => setSelectedJob(job)}
               >
+                <button
+                  onClick={(e) => handleToggleFavourite(e, job)}
+                  style={{
+                    position: 'absolute',
+                    top: '24px',
+                    right: '24px',
+                    width: '32px',
+                    height: '32px',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <svg
+                    width="24" height="24" viewBox="0 0 24 24"
+                    fill={favouriteIds.includes(job.id) ? "#1a56db" : "none"}
+                    stroke={favouriteIds.includes(job.id) ? "#1a56db" : "var(--text-muted)"}
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  >
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
                 <div className="job-info">
                   <h3 className="job-title">{job.title}</h3>
                   <p className="job-company">{job.company}</p>

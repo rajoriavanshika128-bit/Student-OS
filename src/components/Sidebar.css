@@ -25,14 +25,16 @@
     height: 100vh !important;
     z-index: 1000 !important;
     transform: none !important;
-    box-shadow: 20px 0 80px rgba(0,0,0,0.5);
+    box-shadow: 20px 0 80px rgba(0, 0, 0, 0.5);
   }
+
   .bugatti-sidebar.open {
     display: flex !important;
   }
 }
 
-.mobile-hamburger-btn, .mobile-close-btn {
+.mobile-hamburger-btn,
+.mobile-close-btn {
   display: none;
 }
 
@@ -44,7 +46,7 @@
     left: 16px;
     z-index: 999;
     background: #161616;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     width: 40px;
     height: 40px;
     border-radius: 8px;
@@ -55,7 +57,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
+
   .mobile-close-btn {
     display: flex;
     position: absolute;
@@ -63,7 +65,7 @@
     right: 16px;
     z-index: 1001;
     background: #161616;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     width: 40px;
     height: 40px;
     border-radius: 8px;
@@ -85,15 +87,18 @@
 .bugatti-sidebar::after {
   content: '';
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
   opacity: 0.5;
 }
 
 .sidebar-header {
-  padding: 32px 20px 24px; 
+  padding: 32px 20px 24px;
   border-bottom: 1px solid var(--hairline);
   position: relative;
   z-index: 1;
@@ -171,7 +176,7 @@
 }
 
 .nav-link.active {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .nav-link.active .nav-link-text {
@@ -193,11 +198,7 @@
 .sidebar-mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
   z-index: 999;
 }
-
-
-
-
