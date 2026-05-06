@@ -473,6 +473,20 @@ export default function Jobs() {
         <div className="section-sub">Live opportunities for {dna.dreamRole}</div>
       </div>
 
+      <div style={{
+        background: 'rgba(212,160,23,0.08)',
+        border: '1px solid var(--warning)',
+        padding: '12px 20px',
+        marginBottom: 'var(--s-8)',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        letterSpacing: '2px',
+        color: 'var(--warning)',
+        textTransform: 'uppercase'
+      }}>
+        Sample listings for demonstration — not real job postings
+      </div>
+
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40, marginTop: 60, width: '100%', padding: '0 24px' }}>
         <div className="filter-tabs">
           {['All', 'Remote', 'Full-time', 'Internship'].map(f => (
@@ -630,15 +644,13 @@ export default function Jobs() {
 
                 </div>
 
-                <a
-                  href={job.url !== '#' ? job.url : undefined}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={job.url !== '#' ? 'modal-apply-btn' : 'modal-apply-btn modal-apply-disabled'}
-                  onClick={job.url === '#' ? e => e.preventDefault() : undefined}
+                <button
+                  disabled
+                  className="modal-apply-btn"
+                  style={{ opacity: 0.5, cursor: 'not-allowed' }}
                 >
-                  {job.url !== '#' ? 'Apply for this Role' : 'Sample Role — No Link'}
-                </a>
+                  DEMO ONLY
+                </button>
               </div>
             ) : (
               <div
