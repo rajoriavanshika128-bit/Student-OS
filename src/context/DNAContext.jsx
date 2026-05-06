@@ -20,8 +20,26 @@ function getLevelInfo(xp) {
 function loadDNA() {
   try {
     const raw = localStorage.getItem('studentos_dna')
-    return raw ? JSON.parse(raw) : null
+    return raw ? sanitiseDNA(JSON.parse(raw)) : null
   } catch { return null }
+}
+
+function sanitiseDNA(raw) {
+  if (!raw || typeof raw !== 'object') return null
+  if (!raw.degree || !raw.dreamRole || !Array.isArray(raw.skills)) return null
+  return {
+    degree:            raw.degree,
+    dreamRole:         raw.dreamRole,
+    skills:            Array.isArray(raw.skills) ? raw.skills : [],
+    xp:                typeof raw.xp === 'number' ? raw.xp : 0,
+    level:             typeof raw.level === 'number' ? raw.level : 1,
+    streak:            typeof raw.streak === 'number' ? raw.streak : 0,
+    completedSkills:   Array.isArray(raw.completedSkills) ? raw.completedSkills : [],
+    completedMissions: Array.isArray(raw.completedMissions) ? raw.completedMissions : [],
+    focusSessions:     typeof raw.focusSessions === 'number' ? raw.focusSessions : 0,
+    createdAt:         raw.createdAt || new Date().toISOString(),
+    githubUsername:    raw.githubUsername || null,
+  }
 }
 
 function saveDNA(dna) {
