@@ -14,6 +14,7 @@ export default function Sidebar({ isOpen, toggle }) {
       <button
         className="mobile-hamburger-btn"
         onClick={toggle}
+        aria-label="Open navigation"
       >
         <div className="hamburger-line" />
         <div className="hamburger-line" />
@@ -21,7 +22,7 @@ export default function Sidebar({ isOpen, toggle }) {
       </button>
 
       <aside className={`bugatti-sidebar ${isOpen ? 'open' : ''}`}>
-        <button className="mobile-close-btn" onClick={toggle}>
+        <button className="mobile-close-btn" onClick={toggle} aria-label="Close navigation">
           <div className="hamburger-line" style={{ transform: 'translateY(1px) rotate(45deg)' }} />
           <div className="hamburger-line" style={{ transform: 'translateY(-0px) rotate(-45deg)' }} />
         </button>

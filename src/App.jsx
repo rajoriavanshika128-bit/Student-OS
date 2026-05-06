@@ -22,7 +22,11 @@ import VideoBackground from './components/VideoBackground'
 
 function AppInner() {
   const { dna } = useDNA()
-  const [menuOpen, setMenuOpen] = React.useState(window.innerWidth > 768)
+  const [menuOpen, setMenuOpen] = React.useState(false)
+
+  useEffect(() => {
+    if (window.innerWidth > 768) setMenuOpen(true)
+  }, [])
   const location = useLocation()
   const mainRef = useRef(null)
 
