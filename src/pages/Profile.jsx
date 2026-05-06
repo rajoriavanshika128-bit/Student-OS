@@ -217,37 +217,43 @@ export default function Profile() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 4 }}>
-              {Array.from({ length: 7 }).map((_, rowIndex) => (
-                <div key={rowIndex} style={{ display: 'contents' }}>
+              {Array.from({ length: 12 }).map((_, colIndex) => (
+                <div key={colIndex} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                   {githubHeatmap ? (
-                    githubHeatmap.slice(rowIndex * 12, (rowIndex + 1) * 12).map((sq, colIndex) => (
-                      <div
-                        key={colIndex}
-                        title={`${sq.count} pushes on ${sq.date}`}
-                        style={{
-                          width: '100%',
-                          paddingBottom: '100%',
-                          background: sq.color,
-                          borderRadius: 0,
-                          border: '1px solid var(--surface-card)'
-                        }}
-                      />
-                    ))
+                    Array.from({ length: 7 }).map((_, rowIndex) => {
+                      const sq = githubHeatmap[colIndex * 7 + rowIndex];
+                      return (
+                        <div
+                          key={rowIndex}
+                          title={`${sq.count} pushes on ${sq.date}`}
+                          style={{
+                            width: '100%',
+                            paddingBottom: '100%',
+                            background: sq.color,
+                            borderRadius: 0,
+                            border: '1px solid var(--surface-card)'
+                          }}
+                        />
+                      );
+                    })
                   ) : (
-                    days.slice(rowIndex * 12, (rowIndex + 1) * 12).map((dateString, colIndex) => (
-                      <div
-                        key={dateString}
-                        className="heatmap-square"
-                        title={`${dateString} · ${activityCounts[dateString] || 0} actions`}
-                        style={{
-                          width: '100%',
-                          paddingBottom: '100%',
-                          backgroundColor: getColor(dateString),
-                          borderRadius: 0,
-                          border: '1px solid var(--surface-card)'
-                        }}
-                      />
-                    ))
+                    Array.from({ length: 7 }).map((_, rowIndex) => {
+                      const dateString = days[colIndex * 7 + rowIndex];
+                      return (
+                        <div
+                          key={dateString}
+                          className="heatmap-square"
+                          title={`${dateString} · ${activityCounts[dateString] || 0} actions`}
+                          style={{
+                            width: '100%',
+                            paddingBottom: '100%',
+                            backgroundColor: getColor(dateString),
+                            borderRadius: 0,
+                            border: '1px solid var(--surface-card)'
+                          }}
+                        />
+                      );
+                    })
                   )}
                 </div>
               ))}
