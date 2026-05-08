@@ -1,49 +1,91 @@
 # StudentOS X
 
-> A dark-themed, glassmorphism-styled React SPA that functions as a **personal career operating system** for students — not a planner, not a to-do app, but a living dashboard that reconfigures itself around whoever is using it.
+A career dashboard for students — built with React, no UI libraries, no shortcuts.
 
+You tell it your degree, your skills, and the role you're working toward. It stores that as your **Career DNA** and uses it to personalise everything: what skills you're missing, what missions to do today, how your GitHub activity looks, and where you stand on the path to your goal.
 
 ---
 
-## What It Does
+## Pages
 
-On first launch, a cinematic onboarding flow asks three questions — your degree, your current skills, and your dream role — and generates a **Career DNA Profile** that drives every feature in the app.
-
-| Feature | Description |
+| Route | What it does |
 |---|---|
-| 🧬 **Career DNA Profile** | Glowing identity card generated from onboarding; persists across all sessions |
-| 📊 **Skill Gap Engine** | Compares your skills against a JSON career map; renders animated progress bars |
-| 🗺️ **Roadmap Engine** | Dynamic routes (`/roadmap/frontend`) + live GitHub API data per skill node |
-| ⚡ **XP & Missions** | `useReducer`-powered gamification with a full-screen level-up animation |
-| ⏱️ **Focus Zone** | Pomodoro timer via `useEffect` cleanup, session log, localStorage streak counter |
-| 🏠 **Smart Dashboard** | `StatCard`, `XPBar`, `TrendingRepos` — all prop-driven, all reusable |
+| `/` | Dashboard — greeting, XP ring, stat cards, today's mission log |
+| `/skill-gap` | Shows exactly which skills your dream role needs and which you're missing |
+| `/roadmap` | A structured learning path based on your target role |
+| `/missions` | Daily tasks that earn XP when completed |
+| `/github` | Pulls your GitHub repos, languages, and contribution activity live |
+| `/profile` | Your full Career DNA card with GitHub stats and a contribution heatmap |
+| `/jobs` | Job listings filtered by role, with a modal detail view |
+| `/interview` | Role-specific interview questions and answers |
+| `/resume` | A simple resume builder section |
+| `/focus` | Pomodoro-style focus timer with session tracking |
+| `/projects` | Curated project ideas sorted by your skill level |
+| `/resources` | Handpicked learning resources per role |
 
 ---
 
-## Tech Stack
+## How the state works
 
-**React 18** · **React Router v6** · **GitHub REST API** · **Vanilla CSS (Custom Properties)** · **localStorage**
+Everything personal — your role, skills, XP, level, streak — lives in a `DNAContext` that wraps the whole app. It uses `useReducer` internally so state changes are predictable, and syncs to `localStorage` on every update so nothing is lost on refresh.
 
-State lives in a single `studentOS_state` key via a custom `useLocalStorage` hook. `StudentContext` wraps the router — no prop drilling. UI built from scratch with `backdrop-filter: blur` glassmorphism — zero Tailwind, zero UI libraries.
+There's no backend. No database. Just React context + localStorage doing the heavy lifting.
 
 ---
 
-## Quick Start
+## What's connected to real APIs
+
+- **GitHub REST API** — fetches your repos, languages, follower count, and the last 100 events to build a contribution heatmap
+- **Google Gemini API** — used in the Interview section to generate practice questions based on your role
+
+Everything else is driven by the data files in `src/data/` — role-to-skills mapping, mission templates, roadmap content, project ideas, and interview Q&As.
+
+---
+
+## Design
+
+Dark background (`#0a0a0f`), glassmorphism cards, red accent (`#e53935`), monospace labels, Playfair Display headings. Fully hand-written CSS — no Tailwind, no component libraries. Custom CSS properties for spacing, colour, and typography, defined once in `index.css` and used everywhere.
+
+Animations are CSS-only. The XP ring is a raw SVG with `stroke-dashoffset`. The level-up celebration is a full-screen overlay with confetti. All of it written from scratch.
+
+---
+
+## Getting started
 
 ```bash
-git clone https://github.com/your-username/Student-OS.git
+git clone https://github.com/rajoriavanshika128-bit/Student-OS.git
 cd Student-OS
 npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) — the onboarding flow runs automatically on first launch.
+Open `http://localhost:5173` — onboarding runs automatically if no Career DNA is found.
 
 ---
 
-## React Concepts Showcased
+## Project structure
 
-`useReducer` · `useEffect` with cleanups · `useContext` · custom hooks · dynamic `useParams` · controlled forms · localStorage persistence · prop-driven composition · live API with loading/error states
+```
+src/
+├── components/       # Sidebar, Onboarding, AnimatedCounter, XPToast, etc.
+├── context/          # DNAContext — global Career DNA state
+├── data/             # Role skills map, missions, roadmap, resources, projects
+├── pages/            # One file per route
+├── utils/            # Favourites helper
+├── App.jsx           # Routes + layout shell
+└── index.css         # Full design system (tokens, components, animations)
+```
 
 ---
 
+## Built by
+
+**Vanshika Rajoria** — project lead, architecture, design system, most of the pages  
+**Janvi Saraf** — Jobs page, Focus Timer, Resources  
+**Himanshi Yadav** — Resume Builder, Interview section, data files
+
+---
+
+## React concepts used
+
+`useReducer` · `useContext` · `useEffect` with cleanup · `useRef` · `useState` · `useNavigate` · `useParams` · controlled forms · `ErrorBoundary` class component · `AbortController` for fetch cleanup · `localStorage` persistence · dynamic routing

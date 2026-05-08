@@ -24,7 +24,7 @@ export default function AnimatedCounter({ value, onComplete }) {
     }, 30)
 
     return () => clearInterval(interval)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   }, [value])
 
   return <span>{Math.round(displayValue)}</span>
